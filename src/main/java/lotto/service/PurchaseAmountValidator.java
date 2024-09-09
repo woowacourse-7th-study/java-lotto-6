@@ -1,7 +1,7 @@
 package lotto.service;
 
-import lotto.exception.ErrorCode;
 import lotto.exception.ErrorMessage;
+import lotto.view.OutputView;
 
 public class PurchaseAmountValidator {
 
@@ -15,8 +15,7 @@ public class PurchaseAmountValidator {
         try {
             Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
-            String errorMessage = addPrefix(ErrorMessage.ENTER_INTEGER);
-            throw new IllegalArgumentException(errorMessage);
+            OutputView.printErrorMessage(ErrorMessage.ENTER_INTEGER);
         }
     }
 
@@ -24,15 +23,12 @@ public class PurchaseAmountValidator {
         if (canDivideByThousand(purchaseAmount)) {
             return;
         }
-        String errorMessage = addPrefix(ErrorMessage.ENTER_THOUSAND);
-        throw new IllegalArgumentException(errorMessage);
+        OutputView.printErrorMessage(ErrorMessage.ENTER_THOUSAND);
     }
 
     private boolean canDivideByThousand(int purchaseAmount) {
         return purchaseAmount % 1000 == 0;
     }
 
-    private String addPrefix(ErrorMessage errorMessage) {
-        return String.format("%s %s", ErrorCode.PREFIX, errorMessage);
-    }
+
 }
