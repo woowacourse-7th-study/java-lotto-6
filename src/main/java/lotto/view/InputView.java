@@ -1,13 +1,14 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import lotto.constant.ViewMessage;
 
 public class InputView {
     private InputView() {
     }
 
     public static String inputPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(ViewMessage.ENTER_PURCHASE_AMOUNT);
         return Console.readLine();
     }
 }
