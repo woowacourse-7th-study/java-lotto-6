@@ -1,10 +1,10 @@
 package lotto.domain.validator;
 
-import lotto.constant.ErrorMessage;
+import lotto.constant.exception.LottoException;
 
-import static lotto.constant.ErrorMessage.INVALID_PRICE_MIN;
-import static lotto.constant.ErrorMessage.INVALID_PRICE_UNIT;
-import static lotto.constant.ErrorMessage.INVALID_PRICE_INTEGER;
+import static lotto.constant.exception.error.ErrorMessage.INVALID_PRICE_MIN;
+import static lotto.constant.exception.error.ErrorMessage.INVALID_PRICE_UNIT;
+import static lotto.constant.exception.error.ErrorMessage.INVALID_PRICE_INTEGER;
 
 public class inputPriceValidator {
     private static final int PRICE_UNIT = 1000;
@@ -14,7 +14,7 @@ public class inputPriceValidator {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_PRICE_INTEGER.getMessage());
+            throw new LottoException(INVALID_PRICE_INTEGER);
         }
     }
     public static void validateInteger(int price){
@@ -24,12 +24,12 @@ public class inputPriceValidator {
 
     private static void validateMin(int price){ // 최소 금액은 1000원이어야 한다.
         if(price < PRICE_MIN){
-            throw new IllegalArgumentException(INVALID_PRICE_MIN.getMessage());
+            throw new LottoException(INVALID_PRICE_MIN);
         }
     }
     private static void validateUnit(int price){ // 1000원으로 나누어 떨어져야 한다.
         if(price % PRICE_UNIT != 0){
-            throw new IllegalArgumentException(INVALID_PRICE_UNIT.getMessage());
+            throw new LottoException(INVALID_PRICE_UNIT);
         }
     }
 
