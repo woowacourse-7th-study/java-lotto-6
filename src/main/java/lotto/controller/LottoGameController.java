@@ -14,6 +14,7 @@ public class LottoGameController {
     public void run() {
         inputBuyLotto();
         outputLotto();
+
     }
 
     public void inputBuyLotto() { // 로또 구입을 입력한다.
@@ -33,6 +34,17 @@ public class LottoGameController {
         OutputView.printLottoCount(lottoCount); //  로또 개수 출력
         Lottos randomLottos = Lottos.create(lottoCount); // 랜덤 로또 생성
         OutputView.printRandomLottos(randomLottos.getLottos());
+    }
+
+    public void inputLottoNumber(){
+        boolean isValid = true;
+        while(isValid){
+            try{
+                String winningLotto = InputView.requestWinningLotto();
+            }catch (LottoException e) {
+                OutputView.printResult(e.getMessage());  // 에러 메시지 출력
+            }
+        }
     }
 
 }
