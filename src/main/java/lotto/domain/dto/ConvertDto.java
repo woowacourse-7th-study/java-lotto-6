@@ -11,7 +11,7 @@ public class ConvertDto {
         return stringToInteger(input) / TICKET_PRICE;
     }
 
-    private static Integer stringToInteger(String input) { // 입력받은 String 문자열을 Integer 타입으로 변경
+    public static Integer stringToInteger(String input) { // 입력받은 String 문자열을 Integer 타입으로 변경
         inputPriceValidator.validateStringToInteger(input); // 정수로 들어온 값인지 검증
         return Integer.parseInt(input);
     }

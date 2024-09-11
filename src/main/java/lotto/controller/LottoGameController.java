@@ -13,8 +13,8 @@ public class LottoGameController {
 
     public void run() {
         inputBuyLotto();
-        outputLotto();
-
+        outputRandomLotto();
+        inputLottoNumber();
     }
 
     public void inputBuyLotto() { // 로또 구입을 입력한다.
@@ -30,7 +30,7 @@ public class LottoGameController {
         }
     }
 
-    public void outputLotto() { // 랜덤으로 생성한 로또 번호를 출력한다.
+    public void outputRandomLotto() { // 랜덤으로 생성한 로또 번호를 출력한다.
         OutputView.printLottoCount(lottoCount); //  로또 개수 출력
         Lottos randomLottos = Lottos.create(lottoCount); // 랜덤 로또 생성
         OutputView.printRandomLottos(randomLottos.getLottos());
@@ -40,7 +40,9 @@ public class LottoGameController {
         boolean isValid = true;
         while(isValid){
             try{
-                String winningLotto = InputView.requestWinningLotto();
+                String inputLotto = InputView.requestWinningLotto(); // 로또 당첨 번호 입력 받기.
+                Lotto winningLotto = Lotto.create(inputLotto);
+                isValid = false;
             }catch (LottoException e) {
                 OutputView.printResult(e.getMessage());  // 에러 메시지 출력
             }
