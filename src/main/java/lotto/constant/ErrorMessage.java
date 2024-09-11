@@ -10,7 +10,8 @@ public enum ErrorMessage {
     ENTER_NUMBERS_NOT_DUPLICATED("중복되지 않는 정수를 입력해야 합니다."),
     ENTER_BONUS_NUMBER_NOT_DUPLICATED("보너스 번호는 당첨 번호와 중복되지 않아야 합니다."),
     NOT_ALLOWED_WHITESPACE("입력 문자열의 앞, 뒤에는 공백이 포함되지 않아야 합니다.");
-    final String message;
+
+    private final String message;
 
     ErrorMessage(String message) {
         this.message = message;

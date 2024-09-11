@@ -10,7 +10,7 @@ public enum ViewMessage {
     PRINT_RATE_OF_RETURN("총 수익률은 %.1f%입니다."),
     PRINT_ERROR_MESSAGE("%s %s");
 
-    final String message;
+    private final String message;
 
     ViewMessage(String message) {
         this.message = message;

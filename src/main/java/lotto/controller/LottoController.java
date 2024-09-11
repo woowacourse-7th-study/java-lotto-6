@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.dto.BonusNumberData;
+import lotto.domain.dto.LottosData;
 import lotto.domain.dto.PurchasePriceData;
 import lotto.domain.dto.WinningNumbersData;
 import lotto.domain.model.Lottos;
@@ -8,6 +9,7 @@ import lotto.service.BonusNumberService;
 import lotto.service.LottoService;
 import lotto.service.PurchasePriceService;
 import lotto.service.WinningNumbersService;
+import lotto.view.OutputView;
 
 public class LottoController {
     private final PurchasePriceService purchasePriceService;
@@ -29,6 +31,7 @@ public class LottoController {
     public void run() {
         inputPurchasePrice();
         issueLottos();
+        printInformation();
         inputWinningNumbers();
         inputBonusNumber();
     }
@@ -40,6 +43,12 @@ public class LottoController {
     private void issueLottos() {
         Integer count = purchasePriceData.quantity();
         lottos = lottoService.issueLottos(count);
+    }
+
+    private void printInformation() {
+        LottosData lottosData = new LottosData(lottos);
+        OutputView.printQuantity(lottosData);
+        OutputView.printLottosNumbers(lottosData);
     }
 
     private void inputWinningNumbers() {

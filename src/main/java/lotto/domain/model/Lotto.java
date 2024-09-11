@@ -45,4 +45,9 @@ public class Lotto {
         }
         throw new IllegalArgumentException(ENTER_NUMBERS_NOT_DUPLICATED.toString());
     }
+
+    @Override
+    public String toString() {
+        return String.join(", ", numbers.toString());
+    }
 }
