@@ -37,6 +37,9 @@ public class Lotto {
 
         return new Lotto(numbers);
     }
+    public boolean hasSameNumber(BonusNumber bonusNumber) { // 보너스 넘버와 중복이 있는지 확인하는 로직
+        return numbers.contains(bonusNumber.getNumber());
+    }
 
     private void validateLength(List<Integer> numbers) {
         if (isValidLength(numbers)) {

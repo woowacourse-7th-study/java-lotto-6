@@ -2,14 +2,18 @@ package lotto.controller;
 
 import lotto.constant.exception.LottoException;
 import lotto.domain.dto.ConvertDto;
+import lotto.domain.model.BonusNumber;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Lottos;
+import lotto.domain.model.WinningLotto;
 import lotto.domain.randomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+
 public class LottoGameController {
     Integer lottoCount;
+    Lotto inputWinningLotto;
 
     public void run() {
         inputBuyLotto();
@@ -42,7 +46,7 @@ public class LottoGameController {
         while(isValid){
             try{
                 String inputLotto = InputView.requestWinningLotto(); // 로또 당첨 번호 입력 받기.
-                Lotto winningLotto = Lotto.create(inputLotto);
+                inputWinningLotto = Lotto.create(inputLotto);
                 isValid = false;
             }catch (LottoException e) {
                 OutputView.printResult(e.getMessage());  // 에러 메시지 출력
@@ -55,6 +59,9 @@ public class LottoGameController {
         while(isValid){
             try{
                 String inputBonus = InputView.requestBonusLotto(); // 보너스 번호 입력 받기.
+                Integer bonus = ConvertDto.stringToInteger(inputBonus);
+                BonusNumber bonusNumber = new BonusNumber(bonus);
+                WinningLotto winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
                 isValid = false;
             }catch(LottoException e){
                 OutputView.printResult(e.getMessage());
