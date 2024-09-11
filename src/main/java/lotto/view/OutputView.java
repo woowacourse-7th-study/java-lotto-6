@@ -1,21 +1,14 @@
 package lotto.view;
 
-import lotto.constant.ViewMessage;
-import lotto.exception.ErrorCode;
-import lotto.exception.ErrorMessage;
+import static lotto.constant.ErrorMessage.PREFIX;
+import static lotto.constant.ViewMessage.PRINT_ERROR_MESSAGE;
 
 public class OutputView {
     private OutputView() {
     }
 
-    public static void printErrorMessage(ErrorMessage errorMessage) {
-        String result = addPrefix(errorMessage);
-        System.out.println(result);
+    public static void printErrorMessage(String message) {
+        String errorMessage = String.format(PRINT_ERROR_MESSAGE.toString(), PREFIX, message);
+        System.out.println(errorMessage);
     }
-
-    private static String addPrefix(ErrorMessage errorMessage) {
-        String outputFormat = ViewMessage.PRINT_ERROR_MESSAGE.toString();
-        return String.format(outputFormat, ErrorCode.PREFIX, errorMessage);
-    }
-
 }

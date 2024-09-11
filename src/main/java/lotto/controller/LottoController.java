@@ -1,21 +1,41 @@
 package lotto.controller;
 
-import lotto.service.PurchaseAmountValidator;
-import lotto.view.InputView;
+import lotto.domain.dto.BonusNumberData;
+import lotto.domain.dto.PurchasePriceData;
+import lotto.domain.dto.WinningNumbersData;
+import lotto.service.BonusNumberService;
+import lotto.service.PurchasePriceService;
+import lotto.service.WinningNumbersService;
 
 public class LottoController {
-    private final PurchaseAmountValidator purchaseAmountValidator;
+    private final PurchasePriceService purchasePriceService;
+    private final WinningNumbersService winningNumbersService;
+    private BonusNumberService bonusNumberService;
+    private PurchasePriceData purchasePriceData;
+    private WinningNumbersData winningNumbersData;
+    private BonusNumberData bonusNumberData;
 
     public LottoController() {
-        this.purchaseAmountValidator = new PurchaseAmountValidator();
+        this.purchasePriceService = new PurchasePriceService();
+        this.winningNumbersService = new WinningNumbersService();
     }
 
     public void run() {
-        inputPurchaseAmount();
+        inputPurchasePrice();
+        inputWinningNumbers();
+        inputBonusNumber();
     }
 
-    private void inputPurchaseAmount() {
-        String input = InputView.inputPurchaseAmount();
-        purchaseAmountValidator.validatePurchaseAmount(input);
+    private void inputPurchasePrice() {
+        purchasePriceData = purchasePriceService.inputPurchasePrice();
+    }
+
+    private void inputWinningNumbers() {
+        winningNumbersData = winningNumbersService.inputWinningNumbers();
+    }
+
+    private void inputBonusNumber() {
+        bonusNumberService = new BonusNumberService(winningNumbersData.winningNumbers());
+        bonusNumberData = bonusNumberService.inputBonusNumber();
     }
 }
