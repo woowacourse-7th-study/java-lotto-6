@@ -2,6 +2,9 @@ package lotto.controller;
 
 import lotto.constant.exception.LottoException;
 import lotto.domain.dto.ConvertDto;
+import lotto.domain.model.Lotto;
+import lotto.domain.model.Lottos;
+import lotto.domain.randomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,9 +29,10 @@ public class LottoGameController {
         }
     }
 
-    public void outputLotto() {
+    public void outputLotto() { // 랜덤으로 생성한 로또 번호를 출력한다.
         OutputView.printLottoCount(lottoCount); //  로또 개수 출력
-
+        Lottos randomLottos = Lottos.create(lottoCount); // 랜덤 로또 생성
+        OutputView.printRandomLottos(randomLottos.getLottos());
     }
 
 }
