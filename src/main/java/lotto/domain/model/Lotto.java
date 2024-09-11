@@ -12,22 +12,25 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        List<Integer> sorted = numbers.stream()
+                .sorted()
+                .toList();
+        this.numbers = sorted;
     }
 
     private void validate(List<Integer> numbers) {
-        validateSize();
-        validateRange();
-        validateDuplication();
+        validateSize(numbers);
+        validateRange(numbers);
+        validateDuplication(numbers);
     }
 
-    private void validateSize() {
+    private void validateSize(List<Integer> numbers) {
         if (numbers.size() != MAX_COUNT.getValue()) {
             throw new IllegalArgumentException(ENTER_SIX_NUMBERS.toString());
         }
     }
 
-    private void validateRange() {
+    private void validateRange(List<Integer> numbers) {
         numbers.forEach(number -> {
             if (number < RANGE_START.getValue() || number > RANGE_END.getValue()) {
                 throw new IllegalArgumentException(ENTER_NUMBER_IN_RANGE.toString());
@@ -35,7 +38,7 @@ public class Lotto {
         });
     }
 
-    private void validateDuplication() {
+    private void validateDuplication(List<Integer> numbers) {
         Set<Integer> after = new HashSet<>(numbers);
         if (numbers.size() == after.size()) {
             return;

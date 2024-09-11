@@ -34,7 +34,6 @@ public class WinningNumbersService {
         validateInteger(numbers);
         List<Integer> sortedNumbers = Arrays.stream(numbers)
                 .map(Integer::parseInt)
-                .sorted()
                 .toList();
 
         WinningNumbers winningNumbers = new WinningNumbers(sortedNumbers);
@@ -64,5 +63,4 @@ public class WinningNumbersService {
             throw new IllegalArgumentException(ErrorMessage.ENTER_INTEGER.toString());
         }
     }
-
 }
