@@ -20,6 +20,7 @@ public class LottoGameController {
         outputRandomLotto();
         inputLottoNumber();
         inputBonusNumber();
+        announceResult();
     }
 
     public void inputBuyLotto() { // 로또 구입을 입력한다.
@@ -41,7 +42,7 @@ public class LottoGameController {
         OutputView.printRandomLottos(randomLottos.getLottos());
     }
 
-    public void inputLottoNumber(){
+    public void inputLottoNumber(){ // 로또 당첨 번호를 입력 받는다.
         boolean isValid = true;
         while(isValid){
             try{
@@ -54,7 +55,7 @@ public class LottoGameController {
         }
     }
 
-    public void inputBonusNumber(){
+    public void inputBonusNumber(){ // 보너스 번호를 입력 받는다.
         boolean isValid = true;
         while(isValid){
             try{
@@ -67,6 +68,10 @@ public class LottoGameController {
                 OutputView.printResult(e.getMessage());
             }
         }
+    }
+
+    public void announceResult(){ // 당첨 통계를 출력한다.
+        OutputView.printHeaderNotice();
     }
 
 }

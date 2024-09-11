@@ -28,6 +28,7 @@ public class InputView {
     }
 
     public static String requestBonusLotto(){
+        printWhiteSpace();
         System.out.println(BONUS_LOTTO_REQUEST_MESSAGE);
 
         return requestInputBonusLotto();
@@ -37,5 +38,7 @@ public class InputView {
         return Console.readLine();
     }
 
-
+    private static void printWhiteSpace(){
+        System.out.println();
+    }
 }
