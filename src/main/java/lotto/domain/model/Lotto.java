@@ -12,10 +12,9 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        List<Integer> sorted = numbers.stream()
+        this.numbers = numbers.stream()
                 .sorted()
                 .toList();
-        this.numbers = sorted;
     }
 
     private void validate(List<Integer> numbers) {
@@ -44,6 +43,10 @@ public class Lotto {
             return;
         }
         throw new IllegalArgumentException(ENTER_NUMBERS_NOT_DUPLICATED.toString());
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
     @Override

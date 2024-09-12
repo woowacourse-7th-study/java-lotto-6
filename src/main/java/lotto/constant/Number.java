@@ -3,7 +3,8 @@ package lotto.constant;
 public enum Number {
     RANGE_START(1),
     RANGE_END(45),
-    MAX_COUNT(6);
+    MAX_COUNT(6),
+    UNIT(1000);
 
     private final Integer value;
 

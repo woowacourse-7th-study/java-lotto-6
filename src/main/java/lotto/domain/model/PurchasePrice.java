@@ -1,5 +1,7 @@
 package lotto.domain.model;
 
+import lotto.constant.Number;
+
 import static lotto.constant.ErrorMessage.ENTER_THOUSAND;
 
 public class PurchasePrice {
@@ -24,10 +26,10 @@ public class PurchasePrice {
     }
 
     private boolean canDivideByThousand(final Integer purchasePrice) {
-        return purchasePrice % UNIT == 0;
+        return purchasePrice % Number.UNIT.getValue() == 0;
     }
 
     public Integer getQuantity() {
-        return purchasePrice / UNIT;
+        return purchasePrice / Number.UNIT.getValue();
     }
 }

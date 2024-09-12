@@ -10,8 +10,8 @@ public class Lottos {
         this.lottos = new ArrayList<>();
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Integer size() {
+        return lottos.size();
     }
 
     public void addLotto(Lotto lotto) {

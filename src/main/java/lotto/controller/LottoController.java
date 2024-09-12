@@ -5,16 +5,14 @@ import lotto.domain.dto.LottosData;
 import lotto.domain.dto.PurchasePriceData;
 import lotto.domain.dto.WinningNumbersData;
 import lotto.domain.model.Lottos;
-import lotto.service.BonusNumberService;
-import lotto.service.LottoService;
-import lotto.service.PurchasePriceService;
-import lotto.service.WinningNumbersService;
+import lotto.service.*;
 import lotto.view.OutputView;
 
 public class LottoController {
     private final PurchasePriceService purchasePriceService;
     private final LottoService lottoService;
     private final WinningNumbersService winningNumbersService;
+    private final ResultService resultService;
 
     private BonusNumberService bonusNumberService;
     private Lottos lottos;
@@ -26,18 +24,20 @@ public class LottoController {
         this.purchasePriceService = new PurchasePriceService();
         this.winningNumbersService = new WinningNumbersService();
         this.lottoService = new LottoService();
+        this.resultService = new ResultService();
     }
 
     public void run() {
         inputPurchasePrice();
-        issueLottos();
         printInformation();
         inputWinningNumbers();
         inputBonusNumber();
+        printResult();
     }
 
     private void inputPurchasePrice() {
         purchasePriceData = purchasePriceService.inputPurchasePrice();
+        issueLottos();
     }
 
     private void issueLottos() {
@@ -58,5 +58,9 @@ public class LottoController {
     private void inputBonusNumber() {
         bonusNumberService = new BonusNumberService(winningNumbersData.winningNumbers());
         bonusNumberData = bonusNumberService.inputBonusNumber();
+    }
+
+    private void printResult() {
+        resultService.printResult(lottos, winningNumbersData, bonusNumberData);
     }
 }
