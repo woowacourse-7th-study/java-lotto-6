@@ -9,6 +9,7 @@ import java.util.List;
 import static lotto.constant.ErrorMessage.ENTER_NUMBERS_NOT_DUPLICATED;
 import static lotto.constant.ErrorMessage.ENTER_NUMBER_IN_RANGE;
 import static lotto.constant.ErrorMessage.ENTER_SIX_NUMBERS;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -41,8 +42,24 @@ class LottoTest {
     void createdLottoByOverRange() {
         // given
         List<Integer> numbers = new ArrayList<>(List.of(46, 1, 2, 3, 4, 5));
+
+        // when & then
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ENTER_NUMBER_IN_RANGE.toString());
+    }
+
+    @DisplayName("getter 메서드를 통해 로또 번호를 가져올 수 있다.")
+    @Test
+    void getLottoNumbers() {
+        // given
+        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
+        Lotto expected = new Lotto(numbers);
+
+        // when
+        List<Integer> real = expected.getNumbers();
+
+        // then
+        assertThat(real).isEqualTo(expected.getNumbers());
     }
 }
