@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     public static void printLottosNumbers(final LottosDto lottosDto) {
-        Integer size = lottosDto.size();
+        int size = lottosDto.size();
         for (int i = 0; i < size; i++) {
             System.out.println(lottosDto.lottos().get(i));
         }

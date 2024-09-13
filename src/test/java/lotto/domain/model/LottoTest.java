@@ -3,7 +3,6 @@ package lotto.domain.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.constant.ErrorMessage.ENTER_NUMBERS_NOT_DUPLICATED;
@@ -17,7 +16,7 @@ class LottoTest {
     @Test
     void createLottoByOverSize() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
         // when & then
         assertThatThrownBy(() -> new Lotto(numbers))
@@ -29,7 +28,7 @@ class LottoTest {
     @Test
     void createLottoByDuplicatedNumber() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 5));
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 5);
 
         // when & then
         assertThatThrownBy(() -> new Lotto(numbers))
@@ -41,7 +40,7 @@ class LottoTest {
     @Test
     void createdLottoByOverRange() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(46, 1, 2, 3, 4, 5));
+        List<Integer> numbers = List.of(46, 1, 2, 3, 4, 5);
 
         // when & then
         assertThatThrownBy(() -> new Lotto(numbers))
@@ -53,7 +52,7 @@ class LottoTest {
     @Test
     void getLottoNumbers() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto expected = new Lotto(numbers);
 
         // when

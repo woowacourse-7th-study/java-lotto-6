@@ -17,7 +17,7 @@ class WinningNumbersTest {
     @Test
     void createWinningNumbersByOverSize() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
         // when & then
         assertThatThrownBy(() -> new WinningNumbers(numbers))
@@ -29,7 +29,7 @@ class WinningNumbersTest {
     @Test
     void createWinningNumbersByDuplicatedNumber() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 5));
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 5);
 
         // when & then
         assertThatThrownBy(() -> new WinningNumbers(numbers))
@@ -41,7 +41,7 @@ class WinningNumbersTest {
     @Test
     void createWinningNumbersByOverRange() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(46, 1, 2, 3, 4, 5));
+        List<Integer> numbers = List.of(45, 1, 2, 3, 4, 5);
 
         // when & then
         assertThatThrownBy(() -> new WinningNumbers(numbers))
@@ -53,7 +53,7 @@ class WinningNumbersTest {
     @Test
     void getWinningNumbers() {
         // given
-        List<Integer> expected = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> expected = List.of(1, 2, 3, 4, 5, 6);
         WinningNumbers winningNumbers = new WinningNumbers(expected);
 
         // when
