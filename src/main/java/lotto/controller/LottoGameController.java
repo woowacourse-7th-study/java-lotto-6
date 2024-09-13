@@ -28,7 +28,7 @@ public class LottoGameController {
         announceResult();
     }
 
-    public void inputBuyLotto() { // 로또 구입을 입력한다.
+    private void inputBuyLotto() { // 로또 구입을 입력한다.
         boolean isValid = true;  // 입력이 유효한지 여부를 저장
         while (isValid) {
             try {
@@ -41,13 +41,13 @@ public class LottoGameController {
         }
     }
 
-    public void outputRandomLotto() { // 랜덤으로 생성한 로또 번호를 출력한다.
+    private void outputRandomLotto() { // 랜덤으로 생성한 로또 번호를 출력한다.
         OutputView.printLottoCount(lottoCount); //  로또 개수 출력
         randomLottos = Lottos.create(lottoCount); // 랜덤 로또 생성
         OutputView.printRandomLottos(randomLottos.getLottos());
     }
 
-    public void inputLottoNumber() { // 로또 당첨 번호를 입력 받는다.
+    private void inputLottoNumber() { // 로또 당첨 번호를 입력 받는다.
         boolean isValid = true;
         while (isValid) {
             try {
@@ -60,7 +60,7 @@ public class LottoGameController {
         }
     }
 
-    public void inputBonusNumber() { // 보너스 번호를 입력 받는다.
+    private void inputBonusNumber() { // 보너스 번호를 입력 받는다.
         boolean isValid = true;
         while (isValid) {
             try {
@@ -75,7 +75,7 @@ public class LottoGameController {
         }
     }
 
-    public void announceResult() { // 당첨 통계를 출력한다.
+    private void announceResult() { // 당첨 통계를 출력한다.
         OutputView.printHeaderNotice();
         progressStatistics();
         String totalRankStatus = calculateTotalRankStatus();  // 각 Rank의 상태를 하나의 문자열로 합침

@@ -5,12 +5,9 @@ import lotto.domain.model.Rank;
 
 import java.util.List;
 
+import static lotto.constant.ViewMessage.*;
+
 public class OutputView {
-    private static final String LOTTO_COUNT_NOTICE = "개를 구매했습니다.";
-    private static final String WINNING_STATICSTICS = "당첨 통계";
-    private static final String SEPARATOR = "---";
-    private static final String DECIMAL_FORMAT = "%.1f%%";
-    private static final String TOTAL_RATE_FORMAT = "총 수익률은 " + DECIMAL_FORMAT + "입니다.";
 
     public static void printResult(String result) {
         System.out.println(result);
@@ -18,7 +15,7 @@ public class OutputView {
 
     public static void printLottoCount(int lottoCount){
         printWhiteSpace();
-        System.out.println(lottoCount + LOTTO_COUNT_NOTICE);
+        System.out.println(lottoCount + "" + LOTTO_COUNT_NOTICE);
     }
 
     public static void printRandomLottos(List<Lotto> randomLottos){
@@ -31,7 +28,7 @@ public class OutputView {
 
     public static void printHeaderNotice(){
         printWhiteSpace();
-        System.out.println(WINNING_STATICSTICS);
+        System.out.println(WINNING_STATISTICS);
         printLine();
     }
 
@@ -40,7 +37,7 @@ public class OutputView {
     }
 
     public static void printTotalRate(float totalRate) {
-        System.out.printf(TOTAL_RATE_FORMAT, totalRate);
+        System.out.printf(TOTAL_RATE_FORMAT.toString(), totalRate);
     }
 
     private static void printWhiteSpace(){
