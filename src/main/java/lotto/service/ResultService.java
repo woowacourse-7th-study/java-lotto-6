@@ -6,7 +6,6 @@ import lotto.domain.dto.BonusNumberDto;
 import lotto.domain.dto.CountDto;
 import lotto.domain.dto.InputDto;
 import lotto.domain.dto.ResultDto;
-import lotto.domain.dto.WinningNumbersDto;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Lottos;
 import lotto.view.OutputView;
@@ -31,13 +30,9 @@ public class ResultService {
     }
 
     private Integer[] countWinningLotto(InputDto inputDto) {
-        Lottos lottosInfo = inputDto.lottos();
-        WinningNumbersDto winningNumbersDto = inputDto.winningNumbersDto();
+        List<Lotto> lottos = inputDto.lottos().getLottos();
+        List<Integer> winningNumbers = inputDto.winningNumbersDto().winningNumbers();
         BonusNumberDto bonusNumberDto = inputDto.bonusNumberDto();
-
-        List<Integer> winningNumbers = winningNumbersDto.winningNumbers();
-        List<Lotto> lottos = lottosInfo.getLottos();
-
         Integer[] winningLottoCounts = new Integer[WINNERS_COUNT.getValue()];
         Arrays.fill(winningLottoCounts, 0);
 
