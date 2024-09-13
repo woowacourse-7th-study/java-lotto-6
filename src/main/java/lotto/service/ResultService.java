@@ -8,6 +8,8 @@ import lotto.domain.model.WinningLotto;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.constant.LottoConfig.PRICE_UNIT;
+
 public class ResultService {
 
     // 당첨 통계를 진행하는 메서드
@@ -38,11 +40,11 @@ public class ResultService {
     }
 
     // 수익률을 계산하는 메서드
-    public float calculateProfitRate(int totalPurchaseAmount, Map<Rank, Integer> rankStatistics) {
+    public float calculateProfitRate(int lottoCount, Map<Rank, Integer> rankStatistics) {
         int totalPrize = rankStatistics.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
 
-        return ((float) totalPrize / totalPurchaseAmount) * 100;
+        return ((float) totalPrize / (lottoCount * PRICE_UNIT.getValue())) * 100;
     }
 }

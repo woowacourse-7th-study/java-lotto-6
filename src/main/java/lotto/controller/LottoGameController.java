@@ -4,7 +4,6 @@ import lotto.constant.exception.LottoException;
 import lotto.dto.RandomLottoDto;
 import lotto.domain.model.*;
 import lotto.service.ConvertingService;
-import lotto.service.LottoService;
 import lotto.service.ResultService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,7 +12,6 @@ import java.util.*;
 
 
 public class LottoGameController {
-    private LottoService lottoService = new LottoService();
     private Lotto inputWinningLotto;
     private Lottos randomLottos;
     private WinningLotto winningLotto;
@@ -40,7 +38,6 @@ public class LottoGameController {
         return () -> {
             String userPrice = InputView.requestPrice();
             Integer lottoCount = ConvertingService.priceToTicket(userPrice);
-            lottoService.setLottoCount(lottoCount);
             outputRandomLotto(lottoCount);
         };
     }
@@ -79,7 +76,7 @@ public class LottoGameController {
         Map<Rank, Integer> rankStatistics = resultService.progressStatistics(randomLottos.getLottos(), winningLotto);
         String totalRankStatus = resultService.calculateTotalRankStatus(rankStatistics);
         OutputView.printResult(totalRankStatus);
-        float profitRate = resultService.calculateProfitRate(lottoService.getLottoPrice(), rankStatistics);
+        float profitRate = resultService.calculateProfitRate(randomLottos.size(), rankStatistics);
         OutputView.printTotalRate(profitRate);
     }
 }

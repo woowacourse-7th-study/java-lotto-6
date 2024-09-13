@@ -19,7 +19,11 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<Lotto> getLottos(){
+    public Integer size() {
+        return lottos.size();
+    }
+
+    public List<Lotto> getLottos() {
         return lottos;
     }
 }

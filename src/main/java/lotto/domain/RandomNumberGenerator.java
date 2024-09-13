@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class randomNumberGenerator {
+public class RandomNumberGenerator {
     private final static int NUMBER_START = 1;
     private final static int NUMBER_END = 45;
     private final static int NUMBER_COUNT = 6;

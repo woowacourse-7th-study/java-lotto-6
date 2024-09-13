@@ -1,7 +1,7 @@
 package lotto.domain.model;
 
 import lotto.constant.exception.LottoException;
-import lotto.domain.randomNumberGenerator;
+import lotto.domain.RandomNumberGenerator;
 import lotto.service.ConvertingService;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     private Lotto() { // 컴퓨터가 생성하는 로또 번호
-        this.numbers = randomNumberGenerator.generateNumbers();
+        this.numbers = RandomNumberGenerator.generateNumbers();
     }
 
     public Lotto(List<Integer> numbers) { // 사용자의 입력으로 받는 로또 번호
