@@ -2,7 +2,11 @@ package lotto.service;
 
 import lotto.constant.Number;
 import lotto.constant.Profit;
-import lotto.domain.dto.*;
+import lotto.domain.dto.BonusNumberDto;
+import lotto.domain.dto.CountDto;
+import lotto.domain.dto.InputDto;
+import lotto.domain.dto.ResultDto;
+import lotto.domain.dto.WinningNumbersDto;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Lottos;
 import lotto.view.OutputView;

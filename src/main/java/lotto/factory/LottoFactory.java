@@ -5,7 +5,9 @@ import lotto.domain.model.Lotto;
 
 import java.util.List;
 
-import static lotto.constant.Number.*;
+import static lotto.constant.Number.MAX_COUNT;
+import static lotto.constant.Number.RANGE_END;
+import static lotto.constant.Number.RANGE_START;
 
 public class LottoFactory {
     public Lotto issueLotto() {

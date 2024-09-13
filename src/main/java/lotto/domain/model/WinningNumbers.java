@@ -4,8 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static lotto.constant.ErrorMessage.*;
-import static lotto.constant.Number.*;
+import static lotto.constant.ErrorMessage.ENTER_NUMBERS_NOT_DUPLICATED;
+import static lotto.constant.ErrorMessage.ENTER_NUMBER_IN_RANGE;
+import static lotto.constant.ErrorMessage.ENTER_SIX_NUMBERS;
+import static lotto.constant.Number.MAX_COUNT;
+import static lotto.constant.Number.RANGE_END;
+import static lotto.constant.Number.RANGE_START;
 
 public class WinningNumbers {
     private final List<Integer> winningNumbers;

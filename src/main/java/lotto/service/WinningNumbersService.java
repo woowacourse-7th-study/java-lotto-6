@@ -8,7 +8,9 @@ import lotto.view.OutputView;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.constant.ErrorMessage.*;
+import static lotto.constant.ErrorMessage.ENTER_INTEGER;
+import static lotto.constant.ErrorMessage.ENTER_NUMBERS_WITH_COMMA;
+import static lotto.constant.ErrorMessage.NOT_ALLOWED_WHITESPACE;
 
 public class WinningNumbersService {
     private final String COMMA = ",";
