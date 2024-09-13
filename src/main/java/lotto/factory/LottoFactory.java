@@ -10,12 +10,15 @@ import static lotto.constants.Number.RANGE_END;
 import static lotto.constants.Number.RANGE_START;
 
 public class LottoFactory {
-    public Lotto issueLotto() {
+    private LottoFactory() {
+    }
+
+    public static Lotto issueLotto() {
         List<Integer> numbers = createNumbers();
         return new Lotto(numbers);
     }
 
-    private List<Integer> createNumbers() {
+    private static List<Integer> createNumbers() {
         return Randoms.pickUniqueNumbersInRange(RANGE_START.getValue(),
                 RANGE_END.getValue(),
                 MAX_COUNT.getValue());

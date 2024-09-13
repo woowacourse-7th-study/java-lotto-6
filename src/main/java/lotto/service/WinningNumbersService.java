@@ -12,7 +12,6 @@ import java.util.List;
 import static lotto.constants.Symbol.COMMA;
 
 public class WinningNumbersService {
-
     public WinningNumbersDto inputWinningNumbers() {
         return validWinningNumbers();
     }
@@ -29,15 +28,16 @@ public class WinningNumbersService {
 
     private WinningNumbersDto attemptInputWinningNumbers() {
         String input = InputView.inputWinningNumbers();
+        UserInputValidator.validateBlank(input);
         UserInputValidator.validateStrip(input);
         UserInputValidator.validateComma(input);
-        String[] numbers = input.split(COMMA.toString());
-        UserInputValidator.validateInteger(numbers);
-        List<Integer> sortedNumbers = Arrays.stream(numbers)
+        String[] splittedInput = input.split(COMMA.toString());
+        UserInputValidator.validateInteger(splittedInput);
+        List<Integer> numbers = Arrays.stream(splittedInput)
                 .map(Integer::parseInt)
                 .toList();
 
-        WinningNumbers winningNumbers = new WinningNumbers(sortedNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(numbers);
         return new WinningNumbersDto(winningNumbers);
     }
 }

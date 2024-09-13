@@ -4,7 +4,6 @@ import static lotto.constants.ErrorMessage.ENTER_THOUSAND;
 import static lotto.constants.Number.UNIT;
 
 public class PurchasePrice {
-
     private final Integer purchasePrice;
 
     public PurchasePrice(final Integer purchasePrice) {

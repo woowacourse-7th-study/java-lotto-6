@@ -7,7 +7,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class PurchasePriceService {
-
     public PurchasePriceDto inputPurchasePrice() {
         return validPurchasePrice();
     }
@@ -24,6 +23,7 @@ public class PurchasePriceService {
 
     private PurchasePriceDto attemptInputPurchasePrice() {
         String input = InputView.inputPurchaseAmount();
+        UserInputValidator.validateBlank(input);
         UserInputValidator.validateStrip(input);
         UserInputValidator.validateInteger(input);
         Integer price = Integer.parseInt(input);

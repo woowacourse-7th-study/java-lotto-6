@@ -8,8 +8,6 @@ import lotto.view.OutputView;
 
 import java.util.List;
 
-import static lotto.constants.ErrorMessage.ENTER_BONUS_NUMBER_NOT_DUPLICATED;
-
 public class BonusNumberService {
     private final List<Integer> winningNumbers;
 
@@ -33,12 +31,11 @@ public class BonusNumberService {
 
     private BonusNumberDto attemptInputBonusNumber() {
         String input = InputView.inputBonusNumber();
+        UserInputValidator.validateBlank(input);
         UserInputValidator.validateStrip(input);
         UserInputValidator.validateInteger(input);
         Integer number = Integer.parseInt(input);
-        if (winningNumbers.contains(number)) {
-            throw new IllegalArgumentException(ENTER_BONUS_NUMBER_NOT_DUPLICATED.toString());
-        }
+        UserInputValidator.validateDuplication(winningNumbers, number);
         BonusNumber bonusNumber = new BonusNumber(number);
         return new BonusNumberDto(bonusNumber);
     }
