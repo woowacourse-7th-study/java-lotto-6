@@ -41,7 +41,7 @@ class WinningNumbersTest {
     @Test
     void createWinningNumbersByOverRange() {
         // given
-        List<Integer> numbers = List.of(45, 1, 2, 3, 4, 5);
+        List<Integer> numbers = List.of(46, 1, 2, 3, 4, 5);
 
         // when & then
         assertThatThrownBy(() -> new WinningNumbers(numbers))

@@ -99,7 +99,7 @@ public class ResultService {
         Integer size = lottos.size();
         Integer purchaseAmount = size * Number.UNIT.getValue();
         Long profitAmount = calculateProfitAmount(winningLottoCounts);
-        final Double rateOfReturn = (double) (profitAmount - purchaseAmount) / purchaseAmount * 100;
+        final Double rateOfReturn = (double) profitAmount / purchaseAmount * 100;
         return rateOfReturn;
     }
 
