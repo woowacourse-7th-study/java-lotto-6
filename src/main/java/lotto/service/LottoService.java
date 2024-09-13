@@ -6,13 +6,13 @@ import lotto.factory.LottoFactory;
 
 public class LottoService {
 
-    private LottoFactory lottoFactory;
+    private final LottoFactory lottoFactory;
 
     public LottoService() {
         lottoFactory = new LottoFactory();
     }
 
-    public Lottos issueLottos(Integer count) {
+    public Lottos issueLottos(final Integer count) {
         Lottos lottos = new Lottos();
         for (int i = 0; i < count; i++) {
             Lotto lotto = lottoFactory.issueLotto();

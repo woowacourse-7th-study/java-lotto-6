@@ -1,15 +1,15 @@
 package lotto.constant;
 
 public enum Profit {
-    FIFTH(5_000),
-    FOURTH(50_000),
-    THIRD(1_500_000),
-    SECOND(30_000_000),
-    FIRST(2_000_000_000);
+    FIFTH(5_000L),
+    FOURTH(50_000L),
+    THIRD(1_500_000L),
+    SECOND(30_000_000L),
+    FIRST(2_000_000_000L);
 
-    private final long profit;
+    private final Long profit;
 
-    Profit(int profit) {
+    Profit(final Long profit) {
         this.profit = profit;
     }
 

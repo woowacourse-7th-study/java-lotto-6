@@ -11,7 +11,7 @@ public enum Ranking {
     private final Integer numberCount;
     private final String prize;
 
-    Ranking(Integer numberCount, String prize) {
+    Ranking(final Integer numberCount, final String prize) {
         this.numberCount = numberCount;
         this.prize = prize;
     }

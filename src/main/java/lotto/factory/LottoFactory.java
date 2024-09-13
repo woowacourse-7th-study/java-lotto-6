@@ -14,6 +14,8 @@ public class LottoFactory {
     }
 
     private List<Integer> createNumbers() {
-        return Randoms.pickUniqueNumbersInRange(RANGE_START.getValue(), RANGE_END.getValue(), MAX_COUNT.getValue());
+        return Randoms.pickUniqueNumbersInRange(RANGE_START.getValue(),
+                RANGE_END.getValue(),
+                MAX_COUNT.getValue());
     }
 }

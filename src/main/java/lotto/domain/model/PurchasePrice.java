@@ -1,20 +1,18 @@
 package lotto.domain.model;
 
-import lotto.constant.Number;
-
 import static lotto.constant.ErrorMessage.ENTER_THOUSAND;
+import static lotto.constant.Number.UNIT;
 
 public class PurchasePrice {
-    private final Integer UNIT = 1000;
 
     private final Integer purchasePrice;
 
-    public PurchasePrice(Integer purchasePrice) {
+    public PurchasePrice(final Integer purchasePrice) {
         validate(purchasePrice);
         this.purchasePrice = purchasePrice;
     }
 
-    private void validate(Integer purchasePrice) {
+    private void validate(final Integer purchasePrice) {
         checkUnit(purchasePrice);
     }
 
@@ -26,10 +24,10 @@ public class PurchasePrice {
     }
 
     private boolean canDivideByThousand(final Integer purchasePrice) {
-        return purchasePrice % Number.UNIT.getValue() == 0;
+        return purchasePrice % UNIT.getValue() == 0;
     }
 
     public Integer getQuantity() {
-        return purchasePrice / Number.UNIT.getValue();
+        return purchasePrice / UNIT.getValue();
     }
 }

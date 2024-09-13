@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.constant.ErrorMessage;
 import lotto.domain.dto.WinningNumbersData;
 import lotto.domain.model.WinningNumbers;
 import lotto.view.InputView;
@@ -8,6 +7,8 @@ import lotto.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static lotto.constant.ErrorMessage.*;
 
 public class WinningNumbersService {
     private final String COMMA = ",";
@@ -45,14 +46,14 @@ public class WinningNumbersService {
         if (input.equals(stripped)) {
             return;
         }
-        throw new IllegalArgumentException(ErrorMessage.NOT_ALLOWED_WHITESPACE.toString());
+        throw new IllegalArgumentException(NOT_ALLOWED_WHITESPACE.toString());
     }
 
     private void validateComma(final String input) {
         if (input.contains(COMMA)) {
             return;
         }
-        throw new IllegalArgumentException(ErrorMessage.ENTER_NUMBERS_WITH_COMMA.toString());
+        throw new IllegalArgumentException(ENTER_NUMBERS_WITH_COMMA.toString());
     }
 
     private void validateInteger(final String[] numbers) {
@@ -60,7 +61,7 @@ public class WinningNumbersService {
             Arrays.stream(numbers)
                     .forEach(Integer::parseInt);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.ENTER_INTEGER.toString());
+            throw new IllegalArgumentException(ENTER_INTEGER.toString());
         }
     }
 }

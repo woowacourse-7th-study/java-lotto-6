@@ -16,7 +16,7 @@ public class BonusNumber {
         validateRange(bonusNumber);
     }
 
-    private void validateRange(Integer bonusNumber) {
+    private void validateRange(final Integer bonusNumber) {
         if (bonusNumber < RANGE_START.getValue() || bonusNumber > RANGE_END.getValue()) {
             throw new IllegalArgumentException(ENTER_NUMBER_IN_RANGE.toString());
         }

@@ -14,7 +14,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void addLotto(Lotto lotto) {
+    public void addLotto(final Lotto lotto) {
         lottos.add(lotto);
     }
 

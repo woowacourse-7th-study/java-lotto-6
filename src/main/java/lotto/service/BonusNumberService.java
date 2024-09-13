@@ -13,7 +13,7 @@ import static lotto.constant.ErrorMessage.ENTER_BONUS_NUMBER_NOT_DUPLICATED;
 public class BonusNumberService {
     private final List<Integer> winningNumbers;
 
-    public BonusNumberService(List<Integer> winningNumbers) {
+    public BonusNumberService(final List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
