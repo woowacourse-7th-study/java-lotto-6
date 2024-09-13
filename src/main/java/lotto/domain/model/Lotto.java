@@ -1,8 +1,8 @@
 package lotto.domain.model;
 
 import lotto.constant.exception.LottoException;
-import lotto.domain.dto.ConvertDto;
 import lotto.domain.randomNumberGenerator;
+import lotto.service.ConvertingService;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class Lotto {
 
     public static Lotto create(String input) {
         List<Integer> numbers = Arrays.stream(input.split(DILIMITER))
-                .map(ConvertDto::stringToInteger)
+                .map(ConvertingService::stringToInteger)
                 .toList();
 
         return new Lotto(numbers);

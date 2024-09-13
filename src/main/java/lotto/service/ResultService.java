@@ -1,10 +1,9 @@
 package lotto.service;
 
-import lotto.domain.dto.ResultDto;
+import lotto.dto.ResultDto;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Rank;
 import lotto.domain.model.WinningLotto;
-import lotto.service.MatchNumberService;
 
 import java.util.*;
 import java.util.stream.Collectors;

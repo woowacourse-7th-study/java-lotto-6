@@ -1,20 +1,15 @@
 package lotto.controller;
 
 import lotto.constant.exception.LottoException;
-import lotto.domain.dto.ConvertDto;
-import lotto.domain.dto.RandomLottoDto;
-import lotto.domain.dto.ResultDto;
+import lotto.dto.RandomLottoDto;
 import lotto.domain.model.*;
+import lotto.service.ConvertingService;
 import lotto.service.LottoService;
 import lotto.service.ResultService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.service.MatchNumberService;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static lotto.constant.LottoConfig.PRICE_UNIT;
 
 
 public class LottoGameController {
@@ -44,7 +39,7 @@ public class LottoGameController {
     private Runnable inputBuyLottoRunnable() { // 로또 구입을 입력한다.
         return () -> {
             String userPrice = InputView.requestPrice();
-            Integer lottoCount = ConvertDto.priceToTicket(userPrice);
+            Integer lottoCount = ConvertingService.priceToTicket(userPrice);
             lottoService.setLottoCount(lottoCount);
             outputRandomLotto(lottoCount);
         };
@@ -67,7 +62,7 @@ public class LottoGameController {
     private Runnable inputBonusNumberRunnable() { // 보너스 번호를 입력 받는다.
         return () -> {
             String inputBonus = InputView.requestBonusLotto();  // 보너스 번호 입력 받기
-            Integer bonus = ConvertDto.stringToInteger(inputBonus);
+            Integer bonus = ConvertingService.stringToInteger(inputBonus);
             BonusNumber bonusNumber = new BonusNumber(bonus);
             winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
         };
@@ -84,7 +79,7 @@ public class LottoGameController {
         Map<Rank, Integer> rankStatistics = resultService.progressStatistics(randomLottos.getLottos(), winningLotto);
         String totalRankStatus = resultService.calculateTotalRankStatus(rankStatistics);
         OutputView.printResult(totalRankStatus);
-        float profitRate = resultService.calculateProfitRate(lottoService.getLottoCount() * PRICE_UNIT.getValue(), rankStatistics);
+        float profitRate = resultService.calculateProfitRate(lottoService.getLottoPrice(), rankStatistics);
         OutputView.printTotalRate(profitRate);
     }
 }

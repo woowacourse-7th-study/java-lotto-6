@@ -1,4 +1,4 @@
-package lotto.domain.validator;
+package lotto.validator;
 
 import lotto.constant.exception.LottoException;
 
@@ -6,17 +6,10 @@ import static lotto.constant.exception.error.ErrorMessage.INVALID_PRICE_MIN;
 import static lotto.constant.exception.error.ErrorMessage.INVALID_PRICE_UNIT;
 import static lotto.constant.exception.error.ErrorMessage.INVALID_PRICE_INTEGER;
 
-public class inputPriceValidator {
+public class InputPriceValidator {
     private static final int PRICE_UNIT = 1000;
     private static final int PRICE_MIN = 1000;
 
-    public static void validateStringToInteger(String input) { // 문자열-> 숫자 검증 과정
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new LottoException(INVALID_PRICE_INTEGER);
-        }
-    }
     public static void validateInteger(int price){
         validateMin(price);
         validateUnit(price);
