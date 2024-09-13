@@ -41,7 +41,7 @@ class WinningLottoTest {
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining("[ERROR] 중복되는 수를 입력할 수 없습니다.");
     }
-    
+
     @Test
     @DisplayName("WinningLotto의 Lotto 번호 가져오기")
     void getLottoNumbers() {
