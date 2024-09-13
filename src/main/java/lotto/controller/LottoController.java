@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.dto.BonusNumberData;
-import lotto.domain.dto.LottosData;
-import lotto.domain.dto.PurchasePriceData;
-import lotto.domain.dto.WinningNumbersData;
+import lotto.domain.dto.*;
 import lotto.domain.model.Lottos;
 import lotto.service.*;
 import lotto.view.OutputView;
@@ -61,6 +58,7 @@ public class LottoController {
     }
 
     private void printResult() {
-        resultService.printResult(lottos, winningNumbersData, bonusNumberData);
+        InputData inputData = new InputData(lottos, winningNumbersData, bonusNumberData);
+        resultService.printResult(inputData);
     }
 }

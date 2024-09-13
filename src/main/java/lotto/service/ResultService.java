@@ -2,9 +2,7 @@ package lotto.service;
 
 import lotto.constant.Number;
 import lotto.constant.Profit;
-import lotto.domain.dto.BonusNumberData;
-import lotto.domain.dto.ResultData;
-import lotto.domain.dto.WinningNumbersData;
+import lotto.domain.dto.*;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Lottos;
 import lotto.view.OutputView;
@@ -18,32 +16,45 @@ import static lotto.constant.Ranking.FIRST;
 import static lotto.constant.Ranking.THIRD;
 
 public class ResultService {
-    public void printResult(final Lottos lottos, final WinningNumbersData winningNumbersData, final BonusNumberData bonusNumberData) {
+    public void printResult(InputData inputData) {
         OutputView.printResultHeader();
-        Integer[] winningLottoCounts = countWinningLotto(lottos, winningNumbersData, bonusNumberData);
+        Integer[] winningLottoCounts = countWinningLotto(inputData);
+
+        Lottos lottos = inputData.lottos();
         Double rateOfReturn = calculateRateOfReturn(lottos, winningLottoCounts);
         ResultData resultData = createDto(winningLottoCounts, rateOfReturn);
         OutputView.printResult(resultData);
     }
 
-    private Integer[] countWinningLotto(final Lottos lottoInfo, final WinningNumbersData winningNumbersData, final BonusNumberData bonusNumberData) {
+    private Integer[] countWinningLotto(InputData inputData) {
+        Lottos lottosInfo = inputData.lottos();
+        WinningNumbersData winningNumbersData = inputData.winningNumbersData();
+        BonusNumberData bonusNumberData = inputData.bonusNumberData();
+
         List<Integer> winningNumbers = winningNumbersData.winningNumbers();
-        List<Lotto> lottos = lottoInfo.getLottos();
+        List<Lotto> lottos = lottosInfo.getLottos();
+
         Integer[] winningLottoCounts = new Integer[WINNERS_COUNT.getValue()];
         Arrays.fill(winningLottoCounts, 0);
 
         for (Lotto lotto : lottos) {
             List<Integer> lottoNumbers = lotto.getNumbers();
-            countSameNumber(winningNumbers, bonusNumberData, lottoNumbers, winningLottoCounts);
+            CountData countData = new CountData(lottoNumbers, winningNumbers, bonusNumberData, winningLottoCounts);
+            countSameNumber(countData);
         }
 
         return winningLottoCounts;
     }
 
-    private void countSameNumber(final List<Integer> winningNumbers, final BonusNumberData bonusNumberData, final List<Integer> lottoNumbers, final Integer[] winningLottoCounts) {
+    private void countSameNumber(CountData countData) {
+        List<Integer> lottoNumbers = countData.lottoNumbers();
+        List<Integer> winningNumbers = countData.winningNumbers();
+        BonusNumberData bonusNumberData = countData.bonusNumberData();
+        Integer[] winningLottoCounts = countData.winningLottoCounts();
+
         int count = calculateCount(lottoNumbers, winningNumbers);
         if (count >= MIN_COUNT_FOR_PRIZE.getValue()) {
-            int index = calculateIndex(count, bonusNumberData, lottoNumbers);
+            int index = calculateIndex(lottoNumbers, bonusNumberData, count);
             winningLottoCounts[index]++;
         }
     }
@@ -66,7 +77,7 @@ public class ResultService {
         2         5 + bonus   3
         1         6           4
      */
-    private int calculateIndex(final Integer count, BonusNumberData bonusNumberData, final List<Integer> lottoNumbers) {
+    private int calculateIndex(final List<Integer> lottoNumbers, BonusNumberData bonusNumberData, final Integer count) {
         int index = count - MIN_COUNT_FOR_PRIZE.getValue();
         if (count.equals(THIRD.getNumberCount())) {
             index = countBonusNumber(bonusNumberData, lottoNumbers);
