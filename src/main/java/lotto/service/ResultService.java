@@ -14,8 +14,8 @@ public class ResultService {
     private static final int PRICE_UNIT = 1000;
 
     // 당첨 통계를 진행하는 메서드
-    public Map<Rank, Integer> progressStatistics(List<Lotto> randomLottos, WinningLotto winningLotto) {
-        Map<Rank, Integer> rankStatistics = new HashMap<>();
+    public EnumMap<Rank, Integer> progressStatistics(List<Lotto> randomLottos, WinningLotto winningLotto) {
+        EnumMap<Rank, Integer> rankStatistics = new EnumMap<>(Rank.class);
 
         randomLottos.forEach(randomLotto -> {
             int matchCount = MatchNumberService.getMatchNumber(winningLotto, randomLotto);
@@ -26,6 +26,7 @@ public class ResultService {
 
         return rankStatistics;
     }
+
 
     // 랭크 상태를 문자열로 변환하는 메서드
     public String calculateTotalRankStatus(Map<Rank, Integer> rankStatistics) {

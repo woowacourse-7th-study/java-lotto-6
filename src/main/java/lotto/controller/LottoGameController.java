@@ -73,7 +73,8 @@ public class LottoGameController {
     private void progressStatistics() {
         final ResultService resultService = new ResultService();
 
-        Map<Rank, Integer> rankStatistics = resultService.progressStatistics(randomLottos.getLottos(), winningLotto);
+        EnumMap<Rank, Integer> rankStatistics = new EnumMap<>(Rank.class);
+        rankStatistics.putAll(resultService.progressStatistics(randomLottos.getLottos(), winningLotto));
         String totalRankStatus = resultService.calculateTotalRankStatus(rankStatistics);
         OutputView.printResult(totalRankStatus);
         float profitRate = resultService.calculateProfitRate(randomLottos.size(), rankStatistics);
