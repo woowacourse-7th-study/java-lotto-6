@@ -2,13 +2,17 @@ package lotto.controller;
 
 import lotto.constant.exception.LottoException;
 import lotto.domain.dto.ConvertDto;
+import lotto.domain.dto.ResultDto;
 import lotto.domain.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.service.MatchNumberService;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class LottoGameController {
@@ -16,6 +20,8 @@ public class LottoGameController {
     Lotto inputWinningLotto;
     Lottos randomLottos;
     WinningLotto winningLotto;
+
+    Map<Rank, Integer> rankStatistics;
 
     public void run() {
         inputBuyLotto();
@@ -75,29 +81,28 @@ public class LottoGameController {
     public void announceResult(){ // 당첨 통계를 출력한다.
         OutputView.printHeaderNotice();
         progressStatistics();
+        String totalRankStatus = calculateTotalRankStatus();  // 각 Rank의 상태를 하나의 문자열로 합침
+        OutputView.printResult(totalRankStatus);  // 최종 결과 출력
     }
 
     private void progressStatistics() { // 통계 진행
-        Map<Rank, Integer> rankStatistics = new HashMap<>();
+        rankStatistics = new HashMap<>();
 
         randomLottos.getLottos().forEach(randomLotto -> {
-            int matchCount = MatchNumberService.getMatchNumber(winningLotto, randomLotto); // 일치하는 숫자 개수 계산
-            boolean hasBonus = winningLotto.hasSameNumber(randomLotto); // 보너스 번호가 일치하는지 확인
-
-            Rank rank = Rank.matchLottoRank(matchCount, hasBonus); // 등수 계산
-            rankStatistics.put(rank, rankStatistics.getOrDefault(rank, 0) + 1); // 통계 업데이트
+            int matchCount = MatchNumberService.getMatchNumber(winningLotto, randomLotto);  // 일치하는 숫자 개수 계산
+            boolean hasBonus = winningLotto.hasSameNumber(randomLotto);  // 보너스 번호 일치 여부 확인
+            Rank rank = Rank.matchLottoRank(matchCount, hasBonus);  // Rank 결정
+            rankStatistics.put(rank, rankStatistics.getOrDefault(rank, 0) + 1);  // Rank에 해당하는 카운트 증가
         });
-
-        printStatistics(rankStatistics); // 통계 출력
     }
 
-    private void printStatistics(Map<Rank, Integer> rankStatistics) {
-        OutputView.printRankResult(Rank.FIFTH, rankStatistics.getOrDefault(Rank.FIFTH, 0));
-        OutputView.printRankResult(Rank.FIRTH, rankStatistics.getOrDefault(Rank.FIRTH, 0));
-        OutputView.printRankResult(Rank.THIRD, rankStatistics.getOrDefault(Rank.THIRD, 0));
-        OutputView.printRankResult(Rank.SECOND, rankStatistics.getOrDefault(Rank.SECOND, 0));
-        OutputView.printRankResult(Rank.FIRST, rankStatistics.getOrDefault(Rank.FIRST, 0));
+    private String calculateTotalRankStatus() {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.NONE)  // Rank.NONE은 제외
+                .map(rank -> {
+                    int count = rankStatistics.getOrDefault(rank, 0);  // rankStatistics에서 값을 가져오거나 기본값 0
+                    return new ResultDto(rank, count).toRankStatusString();  // ResultDto로 변환 후 상태 문자열 생성
+                })
+                .collect(Collectors.joining("\n"));
     }
-
-
 }

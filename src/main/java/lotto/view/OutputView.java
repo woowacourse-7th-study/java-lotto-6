@@ -37,31 +37,6 @@ public class OutputView {
         System.out.println(SEPARATOR);
     }
 
-    public static void printRankResult(Rank rank, int count) {
-        switch (rank) {
-            case FIFTH:
-                System.out.printf("3개 일치 (5,000원) - %d개%n", count);
-                break;
-            case FIRTH:
-                System.out.printf("4개 일치 (50,000원) - %d개%n", count);
-                break;
-            case THIRD:
-                System.out.printf("5개 일치 (1,500,000원) - %d개%n", count);
-                break;
-            case SECOND:
-                System.out.printf("5개 일치, 보너스 볼 일치 (30,000,000원) - %d개%n", count);
-                break;
-            case FIRST:
-                System.out.printf("6개 일치 (2,000,000,000원) - %d개%n", count);
-                break;
-            default:
-                System.out.printf("일치하는 번호 없음 - %d개%n", count);
-                break;
-        }
-    }
-
-
-
     private static void printWhiteSpace(){
         System.out.println();
     }
