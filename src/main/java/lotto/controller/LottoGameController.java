@@ -5,6 +5,7 @@ import lotto.domain.dto.ConvertDto;
 import lotto.domain.dto.RandomLottoDto;
 import lotto.domain.dto.ResultDto;
 import lotto.domain.model.*;
+import lotto.service.LottoService;
 import lotto.service.ResultService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,82 +14,77 @@ import lotto.service.MatchNumberService;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.constant.LottoConfig.PRICE_UNIT;
+
 
 public class LottoGameController {
-    private Integer lottoCount;
+    private LottoService lottoService = new LottoService();
     private Lotto inputWinningLotto;
     private Lottos randomLottos;
     private WinningLotto winningLotto;
 
     public void run() {
-        inputBuyLotto();
-        outputRandomLotto();
-        inputLottoNumber();
-        inputBonusNumber();
+        runUntilNoException(inputBuyLottoRunnable());
+        runUntilNoException(inputLottoNumberRunnable());
+        runUntilNoException(inputBonusNumberRunnable());
         announceResult();
     }
 
-    private void inputBuyLotto() { // 로또 구입을 입력한다.
-        boolean isValid = true;  // 입력이 유효한지 여부를 저장
-        while (isValid) {
+    private void runUntilNoException(Runnable runnable) {
+        while (true) {
             try {
-                String userPrice = InputView.requestPrice();
-                lottoCount = ConvertDto.priceToTicket(userPrice);
-                isValid = false;  // 유효한 입력이므로 루프 종료
+                runnable.run();
+                break;
             } catch (LottoException e) {
-                OutputView.printResult(e.getMessage());  // 에러 메시지 출력
+                OutputView.printResult(e.getMessage());  // 예외 메시지 출력
             }
         }
     }
 
-    private void outputRandomLotto() { // 랜덤으로 생성한 로또 번호를 출력한다.
+    private Runnable inputBuyLottoRunnable() { // 로또 구입을 입력한다.
+        return () -> {
+            String userPrice = InputView.requestPrice();
+            Integer lottoCount = ConvertDto.priceToTicket(userPrice);
+            lottoService.setLottoCount(lottoCount);
+            outputRandomLotto(lottoCount);
+        };
+    }
+
+    private void outputRandomLotto(int lottoCount) { // 랜덤으로 생성한 로또 번호를 출력한다.
         OutputView.printLottoCount(lottoCount); //  로또 개수 출력
         randomLottos = Lottos.create(lottoCount); // 랜덤 로또 생성
         String outputLotto = RandomLottoDto.lottoToString(randomLottos.getLottos()); // toString
         OutputView.printResult(outputLotto);
     }
 
-    private void inputLottoNumber() { // 로또 당첨 번호를 입력 받는다.
-        boolean isValid = true;
-        while (isValid) {
-            try {
-                String inputLotto = InputView.requestWinningLotto(); // 로또 당첨 번호 입력 받기.
-                inputWinningLotto = Lotto.create(inputLotto);
-                isValid = false;
-            } catch (LottoException e) {
-                OutputView.printResult(e.getMessage());  // 에러 메시지 출력
-            }
-        }
+    private Runnable inputLottoNumberRunnable() { // 로또 당첨 번호를 입력 받는다
+        return () -> {
+            String inputLotto = InputView.requestWinningLotto();  // 로또 당첨 번호 입력 받기
+            inputWinningLotto = Lotto.create(inputLotto);  // 입력된 값을 Lotto 객체로 변환
+        };
     }
 
-    private void inputBonusNumber() { // 보너스 번호를 입력 받는다.
-        boolean isValid = true;
-        while (isValid) {
-            try {
-                String inputBonus = InputView.requestBonusLotto(); // 보너스 번호 입력 받기.
-                Integer bonus = ConvertDto.stringToInteger(inputBonus);
-                BonusNumber bonusNumber = new BonusNumber(bonus);
-                winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
-                isValid = false;
-            } catch (LottoException e) {
-                OutputView.printResult(e.getMessage());
-            }
-        }
+    private Runnable inputBonusNumberRunnable() { // 보너스 번호를 입력 받는다.
+        return () -> {
+            String inputBonus = InputView.requestBonusLotto();  // 보너스 번호 입력 받기
+            Integer bonus = ConvertDto.stringToInteger(inputBonus);
+            BonusNumber bonusNumber = new BonusNumber(bonus);
+            winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
+        };
     }
 
     private void announceResult() { // 최종 결과 출력
-        final ResultService lottoService = new ResultService();
         OutputView.printHeaderNotice();
         progressStatistics();
     }
 
     private void progressStatistics() {
-        final ResultService lottoService = new ResultService();
+        final ResultService resultService = new ResultService();
 
-        Map<Rank, Integer> rankStatistics = lottoService.progressStatistics(randomLottos.getLottos(), winningLotto);
-        String totalRankStatus = lottoService.calculateTotalRankStatus(rankStatistics);
+        Map<Rank, Integer> rankStatistics = resultService.progressStatistics(randomLottos.getLottos(), winningLotto);
+        String totalRankStatus = resultService.calculateTotalRankStatus(rankStatistics);
         OutputView.printResult(totalRankStatus);
-        float profitRate = lottoService.calculateProfitRate(lottoCount * 1000, rankStatistics);
+        float profitRate = resultService.calculateProfitRate(lottoService.getLottoCount() * PRICE_UNIT.getValue(), rankStatistics);
         OutputView.printTotalRate(profitRate);
     }
 }
