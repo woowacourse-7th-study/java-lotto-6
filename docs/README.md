@@ -76,23 +76,23 @@
     - 에시 형식대로 출력하고 로또 게임 종료
 ---
 # 예외 처리
-- [ ] 예외 상황시 에러 문구를 출력해야한다.
+- [x] 예외 상황시 에러 문구를 출력해야한다.
   - "[ERROR] ~"로 시작하며 문구 출력
 
 
-- [ ] 사용자가 잘못된 값을 입력할 경우 `IllegalArgumentException`를 발생
+- [x] 사용자가 잘못된 값을 입력할 경우 `IllegalArgumentException`를 발생
   - `[ERROR]`로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
   - Exception이 아닌 `IllegalArgumentException`, `IllegalStateException` 등과 같은 명확한 유형을 처리
 
 
-- [ ] Validator은 Model에서 진행한다.
+- [x] Validator은 Model에서 진행한다.
 
 ---
 # 테스트 코드
-- [ ] `JUnit 5`와 `AssertJ`를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
+- [x] `JUnit 5`와 `AssertJ`를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
 
 
-- [ ] `도메인 로직`에 `단위 테스트`를 구현해야 한다. 
+- [x] `도메인 로직`에 `단위 테스트`를 구현해야 한다. 
   - 단, `UI(System.out, System.in, Scanner)` 로직은 제외한다.
   - `핵심 로직을 구현하는 코드`와 `UI`를 담당하는 `로직을 분리`해 구현한다.
   - 단위 테스트 작성이 익숙하지 않다면 test/java/lotto/LottoTest를 참고하여 학습한 후 테스트를 구현한다.

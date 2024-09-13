@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import static lotto.constant.LottoConfig.PRICE_UNIT;
 
 public class ResultService {
+    private static final int PRICE_UNIT = 1000;
 
     // 당첨 통계를 진행하는 메서드
     public Map<Rank, Integer> progressStatistics(List<Lotto> randomLottos, WinningLotto winningLotto) {
@@ -45,6 +46,6 @@ public class ResultService {
                 .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
 
-        return ((float) totalPrize / (lottoCount * PRICE_UNIT.getValue())) * 100;
+        return ((float) totalPrize / (lottoCount * PRICE_UNIT) * 100);
     }
 }
