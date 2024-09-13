@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.constant.Ranking;
-import lotto.domain.dto.LottosData;
-import lotto.domain.dto.ResultData;
+import lotto.domain.dto.LottosDto;
+import lotto.domain.dto.ResultDto;
 
 import static lotto.constant.ErrorMessage.PREFIX;
 import static lotto.constant.ViewMessage.*;
@@ -17,17 +17,17 @@ public class OutputView {
         System.out.println(errorMessage);
     }
 
-    public static void printQuantity(final LottosData lottosData) {
+    public static void printQuantity(final LottosDto lottosDto) {
         System.out.println();
-        Integer size = lottosData.size();
+        Integer size = lottosDto.size();
         String purchaseCountMessage = String.format(PRINT_PURCHASE_NUMBERS.toString(), size);
         System.out.println(purchaseCountMessage);
     }
 
-    public static void printLottosNumbers(final LottosData lottosData) {
-        Integer size = lottosData.size();
+    public static void printLottosNumbers(final LottosDto lottosDto) {
+        Integer size = lottosDto.size();
         for (int i = 0; i < size; i++) {
-            System.out.println(lottosData.lottos().get(i));
+            System.out.println(lottosDto.lottos().get(i));
         }
     }
 
@@ -36,9 +36,9 @@ public class OutputView {
         System.out.println(PRINT_WINNING_STATISTICS_HEADER);
     }
 
-    public static void printResult(final ResultData resultData) {
-        Integer[] winningLottoCount = resultData.winningLottoCount();
-        Double rateOfReturn = resultData.rateOfReturn();
+    public static void printResult(final ResultDto resultDto) {
+        Integer[] winningLottoCount = resultDto.winningLottoCount();
+        Double rateOfReturn = resultDto.rateOfReturn();
         printCount(winningLottoCount);
         printRateOfReturn(rateOfReturn);
     }

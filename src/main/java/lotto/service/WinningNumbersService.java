@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.domain.dto.WinningNumbersData;
+import lotto.domain.dto.WinningNumbersDto;
 import lotto.domain.model.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,11 +13,11 @@ import static lotto.constant.ErrorMessage.*;
 public class WinningNumbersService {
     private final String COMMA = ",";
 
-    public WinningNumbersData inputWinningNumbers() {
+    public WinningNumbersDto inputWinningNumbers() {
         return validWinningNumbers();
     }
 
-    private WinningNumbersData validWinningNumbers() {
+    private WinningNumbersDto validWinningNumbers() {
         while (true) {
             try {
                 return attemptInputWinningNumbers();
@@ -27,7 +27,7 @@ public class WinningNumbersService {
         }
     }
 
-    private WinningNumbersData attemptInputWinningNumbers() {
+    private WinningNumbersDto attemptInputWinningNumbers() {
         String input = InputView.inputWinningNumbers();
         validateStrip(input);
         validateComma(input);
@@ -38,7 +38,7 @@ public class WinningNumbersService {
                 .toList();
 
         WinningNumbers winningNumbers = new WinningNumbers(sortedNumbers);
-        return new WinningNumbersData(winningNumbers);
+        return new WinningNumbersDto(winningNumbers);
     }
 
     private void validateStrip(final String input) {

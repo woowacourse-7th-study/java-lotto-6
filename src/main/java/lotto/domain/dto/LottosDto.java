@@ -5,8 +5,8 @@ import lotto.domain.model.Lottos;
 
 import java.util.List;
 
-public record LottosData(List<Lotto> lottos) {
-    public LottosData(Lottos lottos) {
+public record LottosDto(List<Lotto> lottos) {
+    public LottosDto(Lottos lottos) {
         this(lottos.getLottos());
     }
 

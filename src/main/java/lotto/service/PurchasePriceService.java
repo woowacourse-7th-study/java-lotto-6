@@ -1,18 +1,18 @@
 package lotto.service;
 
 import lotto.constant.ErrorMessage;
-import lotto.domain.dto.PurchasePriceData;
+import lotto.domain.dto.PurchasePriceDto;
 import lotto.domain.model.PurchasePrice;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class PurchasePriceService {
 
-    public PurchasePriceData inputPurchasePrice() {
+    public PurchasePriceDto inputPurchasePrice() {
         return validPurchasePrice();
     }
 
-    private PurchasePriceData validPurchasePrice() {
+    private PurchasePriceDto validPurchasePrice() {
         while (true) {
             try {
                 return attemptInputPurchasePrice();
@@ -22,13 +22,13 @@ public class PurchasePriceService {
         }
     }
 
-    private PurchasePriceData attemptInputPurchasePrice() {
+    private PurchasePriceDto attemptInputPurchasePrice() {
         String input = InputView.inputPurchaseAmount();
         validateStrip(input);
         validateInteger(input);
         Integer price = Integer.parseInt(input);
         PurchasePrice purchasePrice = new PurchasePrice(price);
-        return new PurchasePriceData(purchasePrice);
+        return new PurchasePriceDto(purchasePrice);
     }
 
     private void validateStrip(final String input) {

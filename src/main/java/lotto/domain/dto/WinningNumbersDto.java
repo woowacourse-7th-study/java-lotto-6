@@ -4,8 +4,8 @@ import lotto.domain.model.WinningNumbers;
 
 import java.util.List;
 
-public record WinningNumbersData(List<Integer> winningNumbers) {
-    public WinningNumbersData(WinningNumbers winningNumbers) {
+public record WinningNumbersDto(List<Integer> winningNumbers) {
+    public WinningNumbersDto(WinningNumbers winningNumbers) {
         this(winningNumbers.getWinningNumbers());
     }
 }

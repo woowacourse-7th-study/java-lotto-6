@@ -2,8 +2,8 @@ package lotto.domain.dto;
 
 import lotto.domain.model.BonusNumber;
 
-public record BonusNumberData(Integer bonusNumber) {
-    public BonusNumberData(BonusNumber bonusNumber) {
+public record BonusNumberDto(Integer bonusNumber) {
+    public BonusNumberDto(BonusNumber bonusNumber) {
         this(bonusNumber.getBonusNumber());
     }
 }

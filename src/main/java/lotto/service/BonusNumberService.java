@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.constant.ErrorMessage;
-import lotto.domain.dto.BonusNumberData;
+import lotto.domain.dto.BonusNumberDto;
 import lotto.domain.model.BonusNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,11 +17,11 @@ public class BonusNumberService {
         this.winningNumbers = winningNumbers;
     }
 
-    public BonusNumberData inputBonusNumber() {
+    public BonusNumberDto inputBonusNumber() {
         return validBonusNumber();
     }
 
-    private BonusNumberData validBonusNumber() {
+    private BonusNumberDto validBonusNumber() {
         while (true) {
             try {
                 return attemptInputBonusNumber();
@@ -31,7 +31,7 @@ public class BonusNumberService {
         }
     }
 
-    private BonusNumberData attemptInputBonusNumber() {
+    private BonusNumberDto attemptInputBonusNumber() {
         String input = InputView.inputBonusNumber();
         validateStrip(input);
         validateInteger(input);
@@ -40,7 +40,7 @@ public class BonusNumberService {
             throw new IllegalArgumentException(ENTER_BONUS_NUMBER_NOT_DUPLICATED.toString());
         }
         BonusNumber bonusNumber = new BonusNumber(number);
-        return new BonusNumberData(bonusNumber);
+        return new BonusNumberDto(bonusNumber);
     }
 
     private void validateStrip(final String input) {

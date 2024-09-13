@@ -16,22 +16,22 @@ import static lotto.constant.Ranking.FIRST;
 import static lotto.constant.Ranking.THIRD;
 
 public class ResultService {
-    public void printResult(InputData inputData) {
+    public void printResult(InputDto inputDto) {
         OutputView.printResultHeader();
-        Integer[] winningLottoCounts = countWinningLotto(inputData);
+        Integer[] winningLottoCounts = countWinningLotto(inputDto);
 
-        Lottos lottos = inputData.lottos();
+        Lottos lottos = inputDto.lottos();
         Double rateOfReturn = calculateRateOfReturn(lottos, winningLottoCounts);
-        ResultData resultData = createDto(winningLottoCounts, rateOfReturn);
-        OutputView.printResult(resultData);
+        ResultDto resultDto = createDto(winningLottoCounts, rateOfReturn);
+        OutputView.printResult(resultDto);
     }
 
-    private Integer[] countWinningLotto(InputData inputData) {
-        Lottos lottosInfo = inputData.lottos();
-        WinningNumbersData winningNumbersData = inputData.winningNumbersData();
-        BonusNumberData bonusNumberData = inputData.bonusNumberData();
+    private Integer[] countWinningLotto(InputDto inputDto) {
+        Lottos lottosInfo = inputDto.lottos();
+        WinningNumbersDto winningNumbersDto = inputDto.winningNumbersDto();
+        BonusNumberDto bonusNumberDto = inputDto.bonusNumberDto();
 
-        List<Integer> winningNumbers = winningNumbersData.winningNumbers();
+        List<Integer> winningNumbers = winningNumbersDto.winningNumbers();
         List<Lotto> lottos = lottosInfo.getLottos();
 
         Integer[] winningLottoCounts = new Integer[WINNERS_COUNT.getValue()];
@@ -39,22 +39,22 @@ public class ResultService {
 
         for (Lotto lotto : lottos) {
             List<Integer> lottoNumbers = lotto.getNumbers();
-            CountData countData = new CountData(lottoNumbers, winningNumbers, bonusNumberData, winningLottoCounts);
-            countSameNumber(countData);
+            CountDto countDto = new CountDto(lottoNumbers, winningNumbers, bonusNumberDto, winningLottoCounts);
+            countSameNumber(countDto);
         }
 
         return winningLottoCounts;
     }
 
-    private void countSameNumber(CountData countData) {
-        List<Integer> lottoNumbers = countData.lottoNumbers();
-        List<Integer> winningNumbers = countData.winningNumbers();
-        BonusNumberData bonusNumberData = countData.bonusNumberData();
-        Integer[] winningLottoCounts = countData.winningLottoCounts();
+    private void countSameNumber(CountDto countDto) {
+        List<Integer> lottoNumbers = countDto.lottoNumbers();
+        List<Integer> winningNumbers = countDto.winningNumbers();
+        BonusNumberDto bonusNumberDto = countDto.bonusNumberDto();
+        Integer[] winningLottoCounts = countDto.winningLottoCounts();
 
         int count = calculateCount(lottoNumbers, winningNumbers);
         if (count >= MIN_COUNT_FOR_PRIZE.getValue()) {
-            int index = calculateIndex(lottoNumbers, bonusNumberData, count);
+            int index = calculateIndex(lottoNumbers, bonusNumberDto, count);
             winningLottoCounts[index]++;
         }
     }
@@ -77,10 +77,10 @@ public class ResultService {
         2         5 + bonus   3
         1         6           4
      */
-    private int calculateIndex(final List<Integer> lottoNumbers, BonusNumberData bonusNumberData, final Integer count) {
+    private int calculateIndex(final List<Integer> lottoNumbers, BonusNumberDto bonusNumberDto, final Integer count) {
         int index = count - MIN_COUNT_FOR_PRIZE.getValue();
         if (count.equals(THIRD.getNumberCount())) {
-            index = countBonusNumber(bonusNumberData, lottoNumbers);
+            index = countBonusNumber(bonusNumberDto, lottoNumbers);
         }
         if (count.equals(FIRST.getNumberCount())) {
             index++;
@@ -88,8 +88,8 @@ public class ResultService {
         return index;
     }
 
-    private int countBonusNumber(final BonusNumberData bonusNumberData, final List<Integer> lottoNumbers) {
-        int bonusNumber = bonusNumberData.bonusNumber();
+    private int countBonusNumber(final BonusNumberDto bonusNumberDto, final List<Integer> lottoNumbers) {
+        int bonusNumber = bonusNumberDto.bonusNumber();
         if (lottoNumbers.contains(bonusNumber)) {
             return 3;
         }
@@ -113,7 +113,7 @@ public class ResultService {
         return profitAmount;
     }
 
-    private ResultData createDto(final Integer[] winningLottoCounts, final Double rateOfReturn) {
-        return new ResultData(winningLottoCounts, rateOfReturn);
+    private ResultDto createDto(final Integer[] winningLottoCounts, final Double rateOfReturn) {
+        return new ResultDto(winningLottoCounts, rateOfReturn);
     }
 }

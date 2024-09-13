@@ -13,9 +13,9 @@ public class LottoController {
 
     private BonusNumberService bonusNumberService;
     private Lottos lottos;
-    private PurchasePriceData purchasePriceData;
-    private WinningNumbersData winningNumbersData;
-    private BonusNumberData bonusNumberData;
+    private PurchasePriceDto purchasePriceDto;
+    private WinningNumbersDto winningNumbersDto;
+    private BonusNumberDto bonusNumberDto;
 
     public LottoController() {
         this.purchasePriceService = new PurchasePriceService();
@@ -33,32 +33,32 @@ public class LottoController {
     }
 
     private void inputPurchasePrice() {
-        purchasePriceData = purchasePriceService.inputPurchasePrice();
+        purchasePriceDto = purchasePriceService.inputPurchasePrice();
         issueLottos();
     }
 
     private void issueLottos() {
-        Integer count = purchasePriceData.quantity();
+        Integer count = purchasePriceDto.quantity();
         lottos = lottoService.issueLottos(count);
     }
 
     private void printInformation() {
-        LottosData lottosData = new LottosData(lottos);
-        OutputView.printQuantity(lottosData);
-        OutputView.printLottosNumbers(lottosData);
+        LottosDto lottosDto = new LottosDto(lottos);
+        OutputView.printQuantity(lottosDto);
+        OutputView.printLottosNumbers(lottosDto);
     }
 
     private void inputWinningNumbers() {
-        winningNumbersData = winningNumbersService.inputWinningNumbers();
+        winningNumbersDto = winningNumbersService.inputWinningNumbers();
     }
 
     private void inputBonusNumber() {
-        bonusNumberService = new BonusNumberService(winningNumbersData.winningNumbers());
-        bonusNumberData = bonusNumberService.inputBonusNumber();
+        bonusNumberService = new BonusNumberService(winningNumbersDto.winningNumbers());
+        bonusNumberDto = bonusNumberService.inputBonusNumber();
     }
 
     private void printResult() {
-        InputData inputData = new InputData(lottos, winningNumbersData, bonusNumberData);
-        resultService.printResult(inputData);
+        InputDto inputDto = new InputDto(lottos, winningNumbersDto, bonusNumberDto);
+        resultService.printResult(inputDto);
     }
 }
