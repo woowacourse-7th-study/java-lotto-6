@@ -8,10 +8,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.service.MatchNumberService;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -50,39 +47,40 @@ public class LottoGameController {
         OutputView.printRandomLottos(randomLottos.getLottos());
     }
 
-    public void inputLottoNumber(){ // 로또 당첨 번호를 입력 받는다.
+    public void inputLottoNumber() { // 로또 당첨 번호를 입력 받는다.
         boolean isValid = true;
-        while(isValid){
-            try{
+        while (isValid) {
+            try {
                 String inputLotto = InputView.requestWinningLotto(); // 로또 당첨 번호 입력 받기.
                 inputWinningLotto = Lotto.create(inputLotto);
                 isValid = false;
-            }catch (LottoException e) {
+            } catch (LottoException e) {
                 OutputView.printResult(e.getMessage());  // 에러 메시지 출력
             }
         }
     }
 
-    public void inputBonusNumber(){ // 보너스 번호를 입력 받는다.
+    public void inputBonusNumber() { // 보너스 번호를 입력 받는다.
         boolean isValid = true;
-        while(isValid){
-            try{
+        while (isValid) {
+            try {
                 String inputBonus = InputView.requestBonusLotto(); // 보너스 번호 입력 받기.
                 Integer bonus = ConvertDto.stringToInteger(inputBonus);
                 BonusNumber bonusNumber = new BonusNumber(bonus);
                 winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
                 isValid = false;
-            }catch(LottoException e){
+            } catch (LottoException e) {
                 OutputView.printResult(e.getMessage());
             }
         }
     }
 
-    public void announceResult(){ // 당첨 통계를 출력한다.
+    public void announceResult() { // 당첨 통계를 출력한다.
         OutputView.printHeaderNotice();
         progressStatistics();
         String totalRankStatus = calculateTotalRankStatus();  // 각 Rank의 상태를 하나의 문자열로 합침
         OutputView.printResult(totalRankStatus);  // 최종 결과 출력
+        OutputView.printTotalRate(calculateProfitRate(lottoCount * 1000));
     }
 
     private void progressStatistics() { // 통계 진행
@@ -97,12 +95,26 @@ public class LottoGameController {
     }
 
     private String calculateTotalRankStatus() {
-        return Arrays.stream(Rank.values())
+        List<ResultDto> resultDtoList = Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NONE)  // Rank.NONE은 제외
-                .map(rank -> {
-                    int count = rankStatistics.getOrDefault(rank, 0);  // rankStatistics에서 값을 가져오거나 기본값 0
-                    return new ResultDto(rank, count).toRankStatusString();  // ResultDto로 변환 후 상태 문자열 생성
-                })
+                .sorted(Comparator.comparingInt(Rank::getRank).reversed())  // Rank의 순서 내림차순 정렬
+                .map(rank -> new ResultDto(rank, rankStatistics.getOrDefault(rank, 0)))  // ResultDto로 변환
+                .toList();
+
+        // ResultDto 리스트를 순회하며 각 랭크 상태를 문자열로 변환하고, 개행 문자로 연결
+        return resultDtoList.stream()
+                .map(ResultDto::toRankStatusString)  // 각 DTO의 상태를 문자열로 변환
                 .collect(Collectors.joining("\n"));
     }
+
+    private float calculateProfitRate(int totalPurchaseAmount) {
+        // 총 당첨 금액 계산
+        int totalPrize = rankStatistics.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())  // 각 Rank의 상금 * 당첨 횟수
+                .sum();
+
+        return ((float) totalPrize / totalPurchaseAmount) * 100;
+    }
+
+
 }

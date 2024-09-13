@@ -9,6 +9,8 @@ public class OutputView {
     private static final String LOTTO_COUNT_NOTICE = "개를 구매했습니다.";
     private static final String WINNING_STATICSTICS = "당첨 통계";
     private static final String SEPARATOR = "---";
+    private static final String DECIMAL_FORMAT = "%.1f%%";
+    private static final String TOTAL_RATE_FORMAT = "총 수익률은 " + DECIMAL_FORMAT + "입니다.";
 
     public static void printResult(String result) {
         System.out.println(result);
@@ -35,6 +37,10 @@ public class OutputView {
 
     private static void printLine(){
         System.out.println(SEPARATOR);
+    }
+
+    public static void printTotalRate(float totalRate) {
+        System.out.printf(TOTAL_RATE_FORMAT, totalRate);
     }
 
     private static void printWhiteSpace(){
