@@ -2,6 +2,8 @@ package lotto.domain.model;
 
 import lotto.constant.exception.LottoException;
 
+import java.util.List;
+
 import static lotto.constant.exception.error.ErrorMessage.INVALID_DUPLICATION;
 
 public class WinningLotto {
@@ -19,4 +21,12 @@ public class WinningLotto {
             throw new LottoException(INVALID_DUPLICATION);
         }
     }
+    public boolean hasSameNumber(Lotto lotto) { // 당첨 번호 중 bonusNumber를 포함하는지 여부
+        return lotto.getLottoNumbers().contains(bonusNumber.getNumber());
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lotto.getLottoNumbers();
+    }
+
 }
