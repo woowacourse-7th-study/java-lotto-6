@@ -12,8 +12,8 @@ public class randomNumberGenerator {
     private final static int NUMBER_COUNT = 6;
 
     public static List<Integer> generateNumbers() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(NUMBER_START, NUMBER_END, NUMBER_COUNT);
-        Collections.sort(numbers);
+        List<Integer> numbers = new ArrayList<>(Randoms.pickUniqueNumbersInRange(NUMBER_START, NUMBER_END, NUMBER_COUNT)); // 변경 가능한 리스트로 변환
+        Collections.sort(numbers);  // 정렬
         return numbers;
     }
 }
