@@ -6,23 +6,10 @@ import lotto.service.*;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private final PurchasePriceService purchasePriceService;
-    private final LottoService lottoService;
-    private final WinningNumbersService winningNumbersService;
-    private final ResultService resultService;
-
-    private BonusNumberService bonusNumberService;
     private Lottos lottos;
     private PurchasePriceDto purchasePriceDto;
     private WinningNumbersDto winningNumbersDto;
     private BonusNumberDto bonusNumberDto;
-
-    public LottoController() {
-        this.purchasePriceService = new PurchasePriceService();
-        this.winningNumbersService = new WinningNumbersService();
-        this.lottoService = new LottoService();
-        this.resultService = new ResultService();
-    }
 
     public void run() {
         inputPurchasePrice();
@@ -33,11 +20,13 @@ public class LottoController {
     }
 
     private void inputPurchasePrice() {
+        final PurchasePriceService purchasePriceService = new PurchasePriceService();
         purchasePriceDto = purchasePriceService.inputPurchasePrice();
         issueLottos();
     }
 
     private void issueLottos() {
+        final LottoService lottoService = new LottoService();
         Integer count = purchasePriceDto.quantity();
         lottos = lottoService.issueLottos(count);
     }
@@ -49,15 +38,17 @@ public class LottoController {
     }
 
     private void inputWinningNumbers() {
+        final WinningNumbersService winningNumbersService = new WinningNumbersService();
         winningNumbersDto = winningNumbersService.inputWinningNumbers();
     }
 
     private void inputBonusNumber() {
-        bonusNumberService = new BonusNumberService(winningNumbersDto.winningNumbers());
+        BonusNumberService bonusNumberService = new BonusNumberService(winningNumbersDto.winningNumbers());
         bonusNumberDto = bonusNumberService.inputBonusNumber();
     }
 
     private void printResult() {
+        final ResultService resultService = new ResultService();
         InputDto inputDto = new InputDto(lottos, winningNumbersDto, bonusNumberDto);
         resultService.printResult(inputDto);
     }
