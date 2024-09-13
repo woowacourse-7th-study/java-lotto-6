@@ -27,9 +27,9 @@ class PurchasePriceTest {
         // given
         int price = 8000;
         Integer expected = price / UNIT.getValue();
+        PurchasePrice purchasePrice = new PurchasePrice(price);
 
         // when
-        PurchasePrice purchasePrice = new PurchasePrice(price);
         Integer real = purchasePrice.getQuantity();
 
         // then
