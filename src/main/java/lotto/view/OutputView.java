@@ -18,14 +18,6 @@ public class OutputView {
         System.out.println(lottoCount + "" + LOTTO_COUNT_NOTICE);
     }
 
-    public static void printRandomLottos(List<Lotto> randomLottos){
-        StringBuilder lottoBuilder = new StringBuilder();
-        randomLottos.forEach(lotto ->
-            lottoBuilder.append(lotto.getLottoNumbers()).append("\n")
-        );
-        System.out.println(lottoBuilder.toString());
-    }
-
     public static void printHeaderNotice(){
         printWhiteSpace();
         System.out.println(WINNING_STATISTICS);

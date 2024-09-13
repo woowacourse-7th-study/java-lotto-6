@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.constant.exception.LottoException;
 import lotto.domain.dto.ConvertDto;
+import lotto.domain.dto.RandomLottoDto;
 import lotto.domain.dto.ResultDto;
 import lotto.domain.model.*;
 import lotto.view.InputView;
@@ -13,10 +14,10 @@ import java.util.stream.Collectors;
 
 
 public class LottoGameController {
-    Integer lottoCount;
-    Lotto inputWinningLotto;
-    Lottos randomLottos;
-    WinningLotto winningLotto;
+    private Integer lottoCount;
+    private Lotto inputWinningLotto;
+    private Lottos randomLottos;
+    private WinningLotto winningLotto;
 
     Map<Rank, Integer> rankStatistics;
 
@@ -44,7 +45,8 @@ public class LottoGameController {
     private void outputRandomLotto() { // 랜덤으로 생성한 로또 번호를 출력한다.
         OutputView.printLottoCount(lottoCount); //  로또 개수 출력
         randomLottos = Lottos.create(lottoCount); // 랜덤 로또 생성
-        OutputView.printRandomLottos(randomLottos.getLottos());
+        String outputLotto = RandomLottoDto.lottoToString(randomLottos.getLottos()); // toString
+        OutputView.printResult(outputLotto);
     }
 
     private void inputLottoNumber() { // 로또 당첨 번호를 입력 받는다.
