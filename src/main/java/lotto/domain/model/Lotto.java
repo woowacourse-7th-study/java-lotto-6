@@ -23,8 +23,8 @@ public class Lotto {
 
     private void validate(final List<Integer> numbers) {
         validateSize(numbers);
-        validateRange(numbers);
         validateDuplication(numbers);
+        validateRange(numbers);
     }
 
     private void validateSize(final List<Integer> numbers) {
@@ -33,20 +33,20 @@ public class Lotto {
         }
     }
 
-    private void validateRange(final List<Integer> numbers) {
-        numbers.forEach(number -> {
-            if (number < RANGE_START.getValue() || number > RANGE_END.getValue()) {
-                throw new IllegalArgumentException(ENTER_NUMBER_IN_RANGE.toString());
-            }
-        });
-    }
-
     private void validateDuplication(final List<Integer> numbers) {
         Set<Integer> after = new HashSet<>(numbers);
         if (numbers.size() == after.size()) {
             return;
         }
         throw new IllegalArgumentException(ENTER_NUMBERS_NOT_DUPLICATED.toString());
+    }
+
+    private void validateRange(final List<Integer> numbers) {
+        numbers.forEach(number -> {
+            if (number < RANGE_START.getValue() || number > RANGE_END.getValue()) {
+                throw new IllegalArgumentException(ENTER_NUMBER_IN_RANGE.toString());
+            }
+        });
     }
 
     public List<Integer> getNumbers() {
