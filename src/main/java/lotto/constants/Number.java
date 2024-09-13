@@ -1,4 +1,4 @@
-package lotto.constant;
+package lotto.constants;
 
 public enum Number {
     RANGE_START(1),

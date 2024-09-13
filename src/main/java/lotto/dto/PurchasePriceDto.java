@@ -1,6 +1,6 @@
-package lotto.domain.dto;
+package lotto.dto;
 
-import lotto.domain.model.PurchasePrice;
+import lotto.model.PurchasePrice;
 
 public record PurchasePriceDto(Integer quantity) {
     public PurchasePriceDto(PurchasePrice purchasePrice) {

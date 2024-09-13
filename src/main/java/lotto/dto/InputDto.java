@@ -1,6 +1,6 @@
-package lotto.domain.dto;
+package lotto.dto;
 
-import lotto.domain.model.Lottos;
+import lotto.model.Lottos;
 
 public record InputDto(Lottos lottos, WinningNumbersDto winningNumbersDto, BonusNumberDto bonusNumberDto) {
 }

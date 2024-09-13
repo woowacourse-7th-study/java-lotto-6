@@ -1,8 +1,8 @@
-package lotto.domain.model;
+package lotto.model;
 
-import static lotto.constant.ErrorMessage.ENTER_NUMBER_IN_RANGE;
-import static lotto.constant.Number.RANGE_END;
-import static lotto.constant.Number.RANGE_START;
+import static lotto.constants.ErrorMessage.ENTER_NUMBER_IN_RANGE;
+import static lotto.constants.Number.RANGE_END;
+import static lotto.constants.Number.RANGE_START;
 
 public class BonusNumber {
     private final Integer bonusNumber;

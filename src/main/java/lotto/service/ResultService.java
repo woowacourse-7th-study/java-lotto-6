@@ -1,22 +1,22 @@
 package lotto.service;
 
-import lotto.constant.Number;
-import lotto.constant.Profit;
-import lotto.domain.dto.BonusNumberDto;
-import lotto.domain.dto.CountDto;
-import lotto.domain.dto.InputDto;
-import lotto.domain.dto.ResultDto;
-import lotto.domain.model.Lotto;
-import lotto.domain.model.Lottos;
+import lotto.constants.Number;
+import lotto.constants.Profit;
+import lotto.dto.BonusNumberDto;
+import lotto.dto.CountDto;
+import lotto.dto.InputDto;
+import lotto.dto.ResultDto;
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.constant.Number.MIN_COUNT_FOR_PRIZE;
-import static lotto.constant.Number.WINNERS_COUNT;
-import static lotto.constant.Ranking.FIRST;
-import static lotto.constant.Ranking.THIRD;
+import static lotto.constants.Number.MIN_COUNT_FOR_PRIZE;
+import static lotto.constants.Number.WINNERS_COUNT;
+import static lotto.constants.Ranking.FIRST;
+import static lotto.constants.Ranking.THIRD;
 
 public class ResultService {
     public void printResult(InputDto inputDto) {

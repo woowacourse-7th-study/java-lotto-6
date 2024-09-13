@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;

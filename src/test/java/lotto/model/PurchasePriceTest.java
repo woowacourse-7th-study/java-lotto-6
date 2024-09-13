@@ -1,10 +1,10 @@
-package lotto.domain.model;
+package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.constant.ErrorMessage.ENTER_THOUSAND;
-import static lotto.constant.Number.UNIT;
+import static lotto.constants.ErrorMessage.ENTER_THOUSAND;
+import static lotto.constants.Number.UNIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

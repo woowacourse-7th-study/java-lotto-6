@@ -1,8 +1,8 @@
 package lotto.service;
 
-import lotto.constant.ErrorMessage;
-import lotto.domain.dto.PurchasePriceDto;
-import lotto.domain.model.PurchasePrice;
+import lotto.constants.ErrorMessage;
+import lotto.dto.PurchasePriceDto;
+import lotto.model.PurchasePrice;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

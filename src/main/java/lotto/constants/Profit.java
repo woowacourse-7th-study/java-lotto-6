@@ -1,4 +1,4 @@
-package lotto.constant;
+package lotto.constants;
 
 public enum Profit {
     FIFTH(5_000L),

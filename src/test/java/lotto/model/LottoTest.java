@@ -1,13 +1,13 @@
-package lotto.domain.model;
+package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.constant.ErrorMessage.ENTER_NUMBERS_NOT_DUPLICATED;
-import static lotto.constant.ErrorMessage.ENTER_NUMBER_IN_RANGE;
-import static lotto.constant.ErrorMessage.ENTER_SIX_NUMBERS;
+import static lotto.constants.ErrorMessage.ENTER_NUMBERS_NOT_DUPLICATED;
+import static lotto.constants.ErrorMessage.ENTER_NUMBER_IN_RANGE;
+import static lotto.constants.ErrorMessage.ENTER_SIX_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

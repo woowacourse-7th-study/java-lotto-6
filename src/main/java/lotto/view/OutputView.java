@@ -1,11 +1,11 @@
 package lotto.view;
 
-import lotto.constant.Ranking;
-import lotto.domain.dto.LottosDto;
-import lotto.domain.dto.ResultDto;
+import lotto.constants.Ranking;
+import lotto.dto.LottosDto;
+import lotto.dto.ResultDto;
 
-import static lotto.constant.ErrorMessage.PREFIX;
-import static lotto.constant.ViewMessage.*;
+import static lotto.constants.ErrorMessage.PREFIX;
+import static lotto.constants.ViewMessage.*;
 
 public class OutputView {
     private OutputView() {

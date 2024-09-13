@@ -1,6 +1,6 @@
-package lotto.domain.dto;
+package lotto.dto;
 
-import lotto.domain.model.BonusNumber;
+import lotto.model.BonusNumber;
 
 public record BonusNumberDto(Integer bonusNumber) {
     public BonusNumberDto(BonusNumber bonusNumber) {

@@ -1,9 +1,9 @@
-package lotto.constant;
+package lotto.constants;
 
-import static lotto.constant.Number.MAX_COUNT;
-import static lotto.constant.Number.RANGE_END;
-import static lotto.constant.Number.RANGE_START;
-import static lotto.constant.Number.UNIT;
+import static lotto.constants.Number.MAX_COUNT;
+import static lotto.constants.Number.RANGE_END;
+import static lotto.constants.Number.RANGE_START;
+import static lotto.constants.Number.UNIT;
 
 public enum ErrorMessage {
     PREFIX("[ERROR]"),

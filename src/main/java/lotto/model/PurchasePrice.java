@@ -1,7 +1,7 @@
-package lotto.domain.model;
+package lotto.model;
 
-import static lotto.constant.ErrorMessage.ENTER_THOUSAND;
-import static lotto.constant.Number.UNIT;
+import static lotto.constants.ErrorMessage.ENTER_THOUSAND;
+import static lotto.constants.Number.UNIT;
 
 public class PurchasePrice {
 

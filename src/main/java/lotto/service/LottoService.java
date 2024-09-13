@@ -1,7 +1,7 @@
 package lotto.service;
 
-import lotto.domain.model.Lotto;
-import lotto.domain.model.Lottos;
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.factory.LottoFactory;
 
 public class LottoService {

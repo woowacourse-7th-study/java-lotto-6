@@ -1,16 +1,16 @@
 package lotto.service;
 
-import lotto.domain.dto.WinningNumbersDto;
-import lotto.domain.model.WinningNumbers;
+import lotto.dto.WinningNumbersDto;
+import lotto.model.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.constant.ErrorMessage.ENTER_INTEGER;
-import static lotto.constant.ErrorMessage.ENTER_NUMBERS_WITH_COMMA;
-import static lotto.constant.ErrorMessage.NOT_ALLOWED_WHITESPACE;
+import static lotto.constants.ErrorMessage.ENTER_INTEGER;
+import static lotto.constants.ErrorMessage.ENTER_NUMBERS_WITH_COMMA;
+import static lotto.constants.ErrorMessage.NOT_ALLOWED_WHITESPACE;
 
 public class WinningNumbersService {
     private final String COMMA = ",";

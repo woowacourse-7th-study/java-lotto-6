@@ -1,15 +1,15 @@
-package lotto.domain.model;
+package lotto.model;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static lotto.constant.ErrorMessage.ENTER_NUMBERS_NOT_DUPLICATED;
-import static lotto.constant.ErrorMessage.ENTER_NUMBER_IN_RANGE;
-import static lotto.constant.ErrorMessage.ENTER_SIX_NUMBERS;
-import static lotto.constant.Number.MAX_COUNT;
-import static lotto.constant.Number.RANGE_END;
-import static lotto.constant.Number.RANGE_START;
+import static lotto.constants.ErrorMessage.ENTER_NUMBERS_NOT_DUPLICATED;
+import static lotto.constants.ErrorMessage.ENTER_NUMBER_IN_RANGE;
+import static lotto.constants.ErrorMessage.ENTER_SIX_NUMBERS;
+import static lotto.constants.Number.MAX_COUNT;
+import static lotto.constants.Number.RANGE_END;
+import static lotto.constants.Number.RANGE_START;
 
 public class WinningNumbers {
     private final List<Integer> winningNumbers;

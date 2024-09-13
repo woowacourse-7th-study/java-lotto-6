@@ -1,6 +1,6 @@
-package lotto.domain.dto;
+package lotto.dto;
 
-import lotto.domain.model.WinningNumbers;
+import lotto.model.WinningNumbers;
 
 import java.util.List;
 

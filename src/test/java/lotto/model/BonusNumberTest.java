@@ -1,9 +1,9 @@
-package lotto.domain.model;
+package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.constant.ErrorMessage.ENTER_NUMBER_IN_RANGE;
+import static lotto.constants.ErrorMessage.ENTER_NUMBER_IN_RANGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

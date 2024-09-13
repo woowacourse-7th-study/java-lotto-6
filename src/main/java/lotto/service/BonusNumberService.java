@@ -1,14 +1,14 @@
 package lotto.service;
 
-import lotto.constant.ErrorMessage;
-import lotto.domain.dto.BonusNumberDto;
-import lotto.domain.model.BonusNumber;
+import lotto.constants.ErrorMessage;
+import lotto.dto.BonusNumberDto;
+import lotto.model.BonusNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
 
-import static lotto.constant.ErrorMessage.ENTER_BONUS_NUMBER_NOT_DUPLICATED;
+import static lotto.constants.ErrorMessage.ENTER_BONUS_NUMBER_NOT_DUPLICATED;
 
 public class BonusNumberService {
     private final List<Integer> winningNumbers;

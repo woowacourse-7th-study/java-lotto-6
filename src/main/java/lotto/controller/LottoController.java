@@ -1,11 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.dto.BonusNumberDto;
-import lotto.domain.dto.InputDto;
-import lotto.domain.dto.LottosDto;
-import lotto.domain.dto.PurchasePriceDto;
-import lotto.domain.dto.WinningNumbersDto;
-import lotto.domain.model.Lottos;
+import lotto.dto.BonusNumberDto;
+import lotto.dto.InputDto;
+import lotto.dto.LottosDto;
+import lotto.dto.PurchasePriceDto;
+import lotto.dto.WinningNumbersDto;
+import lotto.model.Lottos;
 import lotto.service.BonusNumberService;
 import lotto.service.LottoService;
 import lotto.service.PurchasePriceService;
