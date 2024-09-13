@@ -5,6 +5,7 @@ import lotto.domain.dto.ConvertDto;
 import lotto.domain.dto.RandomLottoDto;
 import lotto.domain.dto.ResultDto;
 import lotto.domain.model.*;
+import lotto.service.ResultService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.service.MatchNumberService;
@@ -18,8 +19,6 @@ public class LottoGameController {
     private Lotto inputWinningLotto;
     private Lottos randomLottos;
     private WinningLotto winningLotto;
-
-    Map<Rank, Integer> rankStatistics;
 
     public void run() {
         inputBuyLotto();
@@ -77,46 +76,19 @@ public class LottoGameController {
         }
     }
 
-    private void announceResult() { // 당첨 통계를 출력한다.
+    private void announceResult() { // 최종 결과 출력
+        final ResultService lottoService = new ResultService();
         OutputView.printHeaderNotice();
         progressStatistics();
-        String totalRankStatus = calculateTotalRankStatus();  // 각 Rank의 상태를 하나의 문자열로 합침
-        OutputView.printResult(totalRankStatus);  // 최종 결과 출력
-        OutputView.printTotalRate(calculateProfitRate(lottoCount * 1000));
     }
 
-    private void progressStatistics() { // 통계 진행
-        rankStatistics = new HashMap<>();
+    private void progressStatistics() {
+        final ResultService lottoService = new ResultService();
 
-        randomLottos.getLottos().forEach(randomLotto -> {
-            int matchCount = MatchNumberService.getMatchNumber(winningLotto, randomLotto);  // 일치하는 숫자 개수 계산
-            boolean hasBonus = winningLotto.hasSameNumber(randomLotto);  // 보너스 번호 일치 여부 확인
-            Rank rank = Rank.matchLottoRank(matchCount, hasBonus);  // Rank 결정
-            rankStatistics.put(rank, rankStatistics.getOrDefault(rank, 0) + 1);  // Rank에 해당하는 카운트 증가
-        });
+        Map<Rank, Integer> rankStatistics = lottoService.progressStatistics(randomLottos.getLottos(), winningLotto);
+        String totalRankStatus = lottoService.calculateTotalRankStatus(rankStatistics);
+        OutputView.printResult(totalRankStatus);
+        float profitRate = lottoService.calculateProfitRate(lottoCount * 1000, rankStatistics);
+        OutputView.printTotalRate(profitRate);
     }
-
-    private String calculateTotalRankStatus() {
-        List<ResultDto> resultDtoList = Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.NONE)  // Rank.NONE은 제외
-                .sorted(Comparator.comparingInt(Rank::getRank).reversed())  // Rank의 순서 내림차순 정렬
-                .map(rank -> new ResultDto(rank, rankStatistics.getOrDefault(rank, 0)))  // ResultDto로 변환
-                .toList();
-
-        // ResultDto 리스트를 순회하며 각 랭크 상태를 문자열로 변환하고, 개행 문자로 연결
-        return resultDtoList.stream()
-                .map(ResultDto::toRankStatusString)  // 각 DTO의 상태를 문자열로 변환
-                .collect(Collectors.joining("\n"));
-    }
-
-    private float calculateProfitRate(int totalPurchaseAmount) {
-        // 총 당첨 금액 계산
-        int totalPrize = rankStatistics.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())  // 각 Rank의 상금 * 당첨 횟수
-                .sum();
-
-        return ((float) totalPrize / totalPurchaseAmount) * 100;
-    }
-
-
 }
