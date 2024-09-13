@@ -1,8 +1,8 @@
 package lotto.service;
 
-import lotto.constants.ErrorMessage;
 import lotto.dto.BonusNumberDto;
 import lotto.model.BonusNumber;
+import lotto.validator.UserInputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -33,29 +33,13 @@ public class BonusNumberService {
 
     private BonusNumberDto attemptInputBonusNumber() {
         String input = InputView.inputBonusNumber();
-        validateStrip(input);
-        validateInteger(input);
+        UserInputValidator.validateStrip(input);
+        UserInputValidator.validateInteger(input);
         Integer number = Integer.parseInt(input);
         if (winningNumbers.contains(number)) {
             throw new IllegalArgumentException(ENTER_BONUS_NUMBER_NOT_DUPLICATED.toString());
         }
         BonusNumber bonusNumber = new BonusNumber(number);
         return new BonusNumberDto(bonusNumber);
-    }
-
-    private void validateStrip(final String input) {
-        String stripped = input.strip();
-        if (input.equals(stripped)) {
-            return;
-        }
-        throw new IllegalArgumentException(ErrorMessage.NOT_ALLOWED_WHITESPACE.toString());
-    }
-
-    private void validateInteger(final String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.ENTER_INTEGER.toString());
-        }
     }
 }

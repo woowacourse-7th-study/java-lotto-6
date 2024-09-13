@@ -2,18 +2,16 @@ package lotto.service;
 
 import lotto.dto.WinningNumbersDto;
 import lotto.model.WinningNumbers;
+import lotto.validator.UserInputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.constants.ErrorMessage.ENTER_INTEGER;
-import static lotto.constants.ErrorMessage.ENTER_NUMBERS_WITH_COMMA;
-import static lotto.constants.ErrorMessage.NOT_ALLOWED_WHITESPACE;
+import static lotto.constants.Symbol.COMMA;
 
 public class WinningNumbersService {
-    private final String COMMA = ",";
 
     public WinningNumbersDto inputWinningNumbers() {
         return validWinningNumbers();
@@ -31,39 +29,15 @@ public class WinningNumbersService {
 
     private WinningNumbersDto attemptInputWinningNumbers() {
         String input = InputView.inputWinningNumbers();
-        validateStrip(input);
-        validateComma(input);
-        String[] numbers = input.split(COMMA);
-        validateInteger(numbers);
+        UserInputValidator.validateStrip(input);
+        UserInputValidator.validateComma(input);
+        String[] numbers = input.split(COMMA.toString());
+        UserInputValidator.validateInteger(numbers);
         List<Integer> sortedNumbers = Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .toList();
 
         WinningNumbers winningNumbers = new WinningNumbers(sortedNumbers);
         return new WinningNumbersDto(winningNumbers);
-    }
-
-    private void validateStrip(final String input) {
-        String stripped = input.strip();
-        if (input.equals(stripped)) {
-            return;
-        }
-        throw new IllegalArgumentException(NOT_ALLOWED_WHITESPACE.toString());
-    }
-
-    private void validateComma(final String input) {
-        if (input.contains(COMMA)) {
-            return;
-        }
-        throw new IllegalArgumentException(ENTER_NUMBERS_WITH_COMMA.toString());
-    }
-
-    private void validateInteger(final String[] numbers) {
-        try {
-            Arrays.stream(numbers)
-                    .forEach(Integer::parseInt);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ENTER_INTEGER.toString());
-        }
     }
 }
